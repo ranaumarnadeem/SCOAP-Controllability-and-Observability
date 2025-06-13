@@ -127,3 +127,10 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+#extra for now
+parsetab.py
+test_env.py
+test.txt
+out.txt
+parser.out
