@@ -134,3 +134,4 @@ test_env.py
 test.txt
 out.txt
 parser.out
+pyverilog-env
