@@ -48,18 +48,28 @@ DFF out(q1) in(d1 clk)
 
 ## 📂 File Output Format
 
-out.txt
-├── # Primary Inputs
-├── # Primary Outputs
-├── # FAN IN
-├── # FAN OUT
-├── # Complete Paths
-│ ├── <GATETYPE> out(<OUTNET>) in(<IN1> <IN2> ...)
-│ ├── INPUT <PI1> <PI2> ...
-│ ├── OUTPUT <PO1> <PO2> ...
-│ └── FANOUT <NET> <LOAD1> <LOAD2> ...
+The `out.txt` file is structured into labeled sections for easy parsing and analysis:
 
----
+```text
+# Primary Inputs
+g1 g2 g3 ...
+
+# Primary Outputs
+g100 g101 ...
+
+# FAN IN
+g45
+g46
+...
+
+# FAN OUT
+FANOUT g50 g60 g61 g62
+
+# Complete Paths
+NAND out(g1243) in(g1244 g1245)
+DFF out(q1) in(d1 clk)
+...
+
 
 ## 🛠️ Technologies
 
@@ -81,11 +91,6 @@ The calculator originally developed by Dr. Rathnamala Rao has been forked. This 
 
 ---
 
-## 🔍 Keywords for Discovery
-
-`verilog parser` `DFT` `gate-level netlist` `SCOAP` `controllability observability` `pyverilog` `netlist analysis` `fanin fanout` `testability` `scan chain` `VLSI` `ASIC verification` `logic synthesis` `design for testability`
-
----
 
 ## 🤝 Contributing
 
@@ -105,13 +110,19 @@ To contribute:
 
 ## 🧪 Example
 
-Given the following Verilog instance:
+Given the following Verilog gate-level instance:
 
 ```verilog
 NAND2X1 U1 ( .A(g3), .B(g4), .Y(g5) );
 NAND out(g5) in(g3 g4)
+```
+In case of Flip-Flop
+```verilog
+DFFPOSX1 D1 ( .D(g1), .CLK(clk), .Q(g2) );
+DFF out(g2) in(g1 clk)
+
 
 ---
 📫 Contact
 For questions, feel free to raise an Issue or contact the maintainer.
-Let me know if you'd like the badge links added, or want the SCOAP repo name, DOI, or citations integrated as well.
+
