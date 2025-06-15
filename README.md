@@ -1,58 +1,117 @@
-# SCOAP-Controllability-and-Observability
-This project is based on Digital VLSI Testing and Testability. The netlist is given as input, the code performs SCOAP  Controllability and Observability of circuit.
+# 🔍 Verilog Netlist Parser for DFT Automation
 
-# Prerequisite for this project
-1) Create a netlist by naming all wires with numbers (increasing order 1,2,3,.....), starting from input to output. example is shown below
-2) Save the netlist in .txt format and edit netlist file name in code. (Don't give extra spacing at end of netlist).
+This project provides a **robust parser for Verilog netlists** aimed at **Design-for-Testability (DFT)** research and automation. It is specifically built to handle **gate-level netlists** (output of tools like Synopsys Genus, IC Compiler, etc.) and extract the following:
 
-# Example (4:1 MUX netlist is used for simulation)
-```
-NAND 5 3 4
-AND 14 6 7
-AND 15 8 9
-AND 16 10 11
-AND 17 12 13
-OR 21 14 15
-OR 23 16 17
-NAND 24 19 20
-AND 25 21 24
-AND 26 22 23
-OR 27 25 26
-INPUT 1 7 9 11 13 18
-OUTPUT 27
-FANOUT 1 2 8 12
-FANOUT 2 3 4
-FANOUT 5 6 10
-FANOUT 18 19 20 22
-```
+- **Logic gates** with output/input nets
+- **Flip-flops**
+- **Primary Inputs and Outputs**
+- **Internal wires**
+- **Fan-in and Fan-out nets**
 
-![mux-01](https://user-images.githubusercontent.com/63975346/140762141-6ed6b118-ce2d-4609-ae6a-2e8b598c3c0f.png)
+> 📌 **Note**: This project is still under active development. The next milestone is integrating a **Controllability and Observability (COP/SCOAP)** calculator by adapting the work of [Dr. Rathnamala Rao](https://github.com/rathnamala-rao), whose SCOAP calculator has been forked for this purpose.
 
-The code contain many variable and functions which are used in fault collapsing and fault simulation. Each cell in code contain description of variabels and function. 
+---
 
-# SCOAP Controllability
-Controllability means difficulty of setting internal circuit lines to 0 or 1 by setting primary circuit inputs.
+## 🧠 Motivation
 
-![CC0](https://user-images.githubusercontent.com/63975346/140855245-7cbadb33-5f61-44d1-86e6-06a4b9ba75d3.PNG)
+Gate-level netlists from tools like Genus or IC Compiler use a Verilog format that is **not directly compatible with most DFT tools or academic SCOAP calculators**.
 
-SCOAP Controllability In above figure CC1_5 means Combinational Controllability of 1 at node 5. And CC0_5 means Combinational Controllability of 0 at node 5.
+- Netlist structure varies widely depending on the tool.
+- Existing COP/SCOAP tools require manually reformatted inputs.
+  
+This parser **bridges the gap** between standard tool output and academic DFT metric calculators.
 
-# SCOAP Observability
+---
 
-Observability means difficulty of observing internal circuit lines by observing primary outputs.
+## 📦 Features
 
-![Observe](https://user-images.githubusercontent.com/63975346/140855778-29d649c2-d3d9-4183-a5c6-4ef327a6cc17.PNG)
+### ✅ Verilog Netlist Parsing
+- Supports standard gate-level Verilog.
+- Parses all modules, instances, wires, and ports.
 
-SCOAP Observability In above figure CO_5 means Combinational Observability of node 5. And CO_2 means Combinational Observability of node 2.
+### ✅ DFT-Friendly Summary Output
+The parsed summary (`out.txt`) includes:
 
-# Manual Calculation of SCOAP Controllability  and Observability
+- `# Primary Inputs`: All PI nets (e.g., `g1`, `CK`, etc.)
+- `# Primary Outputs`: All PO nets
+- `# FAN IN`: Nets that are used as inputs to multiple components
+- `# FAN OUT`: Nets that drive multiple destinations
+- `# Complete Paths`: Detailed gate-wise listing:
 
-![SCOAP-01](https://user-images.githubusercontent.com/63975346/140856015-57eaa5c0-ae93-4fed-8df2-4d5b622e47b2.png)
+- `# Complete Paths`: Detailed gate-wise listing:
+NAND out(g1243) in(g1244 g1245)
+DFF out(q1) in(d1 clk)
+...
 
-In above figure at node 10 the values are (3,2) 13.  
-The values inside brackets represent Combinational Controllability. Here 3 is Combinational Controllability of 0 at node 10, similarly 2 is Combinational Controllability of 1 at node 10. 13 represents Combinational Observability of node 10
 
-# Acknowledgement
-Dr. Rathnamala Rao, Assistant Professor, NITK Surathkal
+---
 
-# THANK YOU
+## 📂 File Output Format
+
+out.txt
+├── # Primary Inputs
+├── # Primary Outputs
+├── # FAN IN
+├── # FAN OUT
+├── # Complete Paths
+│ ├── <GATETYPE> out(<OUTNET>) in(<IN1> <IN2> ...)
+│ ├── INPUT <PI1> <PI2> ...
+│ ├── OUTPUT <PO1> <PO2> ...
+│ └── FANOUT <NET> <LOAD1> <LOAD2> ...
+
+---
+
+## 🛠️ Technologies
+
+- **Python 3**
+- [Pyverilog](https://github.com/PyHDI/Pyverilog) – Verilog parser
+- Regex and AST traversal
+
+---
+
+## 🚧 Next Milestone: SCOAP Integration
+
+The parser is being extended to feed data directly into a **SCOAP calculator** for:
+- **Controllability (CC0/CC1)**
+- **Observability (CO)**
+
+The calculator originally developed by Dr. Rathnamala Rao has been forked. This version will be modified to:
+- Accept `out.txt` or in-memory netlist graph from this parser.
+- Provide a direct and accurate SCOAP metric dump.
+
+---
+
+## 🔍 Keywords for Discovery
+
+`verilog parser` `DFT` `gate-level netlist` `SCOAP` `controllability observability` `pyverilog` `netlist analysis` `fanin fanout` `testability` `scan chain` `VLSI` `ASIC verification` `logic synthesis` `design for testability`
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! You can:
+- Add support for more Verilog constructs (e.g., more FF types, buffers).
+- Optimize fanin/fanout analysis using graph traversal.
+- Add JSON output mode for integration with other DFT tools.
+- Help convert the `out.txt` format into a SCOAP input graph.
+
+To contribute:
+1. Fork this repo
+2. Create a new branch (`feature-x`)
+3. Commit your changes
+4. Open a PR 🎉
+
+---
+
+## 🧪 Example
+
+Given the following Verilog instance:
+
+```verilog
+NAND2X1 U1 ( .A(g3), .B(g4), .Y(g5) );
+NAND out(g5) in(g3 g4)
+
+---
+📫 Contact
+For questions, feel free to raise an Issue or contact the maintainer.
+Let me know if you'd like the badge links added, or want the SCOAP repo name, DOI, or citations integrated as well.

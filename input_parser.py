@@ -1,28 +1,3 @@
-'''
-Verilog netlist parser: Structured output with sections and complete paths
-Install: pip install pyverilog
-Usage: python verilog_parser.py <netlist.v>
-Produces out.txt with sections:
-
-# Primary Inputs
-<list of nets>
-
-# Primary Outputs
-<list of nets>
-
-# FAN IN
-<nets with drivers>
-
-# FAN OUT
-<nets with loads>
-
-# Complete Paths
-Detailed instance and net listings:
-  <GATE_TYPE> out(<driver>) in(<nets>)
-  INPUT <pi1> <pi2> …
-  OUTPUT <po1> <po2> …
-  FANOUT <net> <load1> <load2> …
-'''
 import sys
 from collections import defaultdict
 from pyverilog.vparser.parser import parse
