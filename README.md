@@ -50,7 +50,7 @@ DFF out(q1) in(d1 clk)
 
 The `out.txt` file is structured into labeled sections for easy parsing and analysis:
 
-```text
+```verilog
 # Primary Inputs
 g1 g2 g3 ...
 
@@ -60,7 +60,7 @@ g100 g101 ...
 # FAN IN
 g45
 g46
-...
+
 
 # FAN OUT
 FANOUT g50 g60 g61 g62
@@ -68,15 +68,14 @@ FANOUT g50 g60 g61 g62
 # Complete Paths
 NAND out(g1243) in(g1244 g1245)
 DFF out(q1) in(d1 clk)
-...
-
+```
+---
 
 ## 🛠️ Technologies
 
 - **Python 3**
 - [Pyverilog](https://github.com/PyHDI/Pyverilog) – Verilog parser
 - Regex and AST traversal
-
 ---
 
 ## 🚧 Next Milestone: SCOAP Integration
@@ -116,13 +115,15 @@ Given the following Verilog gate-level instance:
 NAND2X1 U1 ( .A(g3), .B(g4), .Y(g5) );
 NAND out(g5) in(g3 g4)
 ```
+
 In case of Flip-Flop
+
 ```verilog
 DFFPOSX1 D1 ( .D(g1), .CLK(clk), .Q(g2) );
 DFF out(g2) in(g1 clk)
-
+```
 
 ---
-📫 Contact
+## 📫 Contact
 For questions, feel free to raise an Issue or contact the maintainer.
 
