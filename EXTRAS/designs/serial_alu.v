@@ -20,5 +20,15 @@ module serial_alu(
             zero <= (result == 0);
         end
     end
+    endmodule
+/*
+    // Simulation-only block
+    `ifdef COCOTB_SIM
+    initial begin
+        $dumpfile("serial_alu.vcd");
+        $dumpvars(0, serial_alu);
+        #100 $finish;
+    end
+    `endif
 endmodule
-
+*/
