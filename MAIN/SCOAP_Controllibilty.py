@@ -5,6 +5,7 @@ import sys
 import os
 import re
 import math
+import json
 from collections import defaultdict
 
 def expand_vector(signal):
@@ -13,216 +14,203 @@ def expand_vector(signal):
         return [signal]
     base, msb, lsb = m.group(1), int(m.group(2)), int(m.group(3))
     if msb >= lsb:
+        # go from msb down to lsb *inclusive*
         return [f"{base}[{i}]" for i in range(msb, lsb - 1, -1)]
     else:
+        # go from msb up to lsb *inclusive*
         return [f"{base}[{i}]" for i in range(msb, lsb + 1)]
 
 def read_netlist(filename):
     try:
         with open(filename) as f:
-            lines = [line.rstrip() for line in f if line.strip()]
+            return [line.rstrip() for line in f if line.strip()]
     except FileNotFoundError:
         print(f"Error: cannot open '{filename}'", file=sys.stderr)
         sys.exit(1)
-    return lines
 
 def parse_sections(lines):
     inputs, outputs = [], []
     fanout_list, gates_list = [], []
     section = None
-
-    gate_re = re.compile(r'^\s*(\w+)\s+out\(\s*([^)]+)\s*\)\s+in\(\s*([^)]+)\s*\)\s*$')
-
+    gate_re = re.compile(r'^\s*(\w+)\s+out\(\s*([^)]+)\)\s+in\(\s*([^)]+)\)\s*$')
     for lineno, line in enumerate(lines, start=1):
-        # detect section by header comment
         if line.startswith('#'):
-            if 'Primary Inputs'  in line:
-                section = 'INPUT'
-            elif 'Primary Outputs' in line:
-                section = 'OUTPUT'
-            elif 'FAN OUT' in line:
-                section = 'FANOUT'
-            elif 'Complete Paths' in line:
-                section = 'GATES'
-            else:
-                section = None
+            if 'Primary Inputs' in line:    section = 'INPUT'
+            elif 'Primary Outputs' in line: section = 'OUTPUT'
+            elif 'FAN OUT' in line:         section = 'FANOUT'
+            elif 'Complete Paths' in line:  section = 'GATES'
+            else:                           section = None
             continue
-
-        # summary lines (INPUT, OUTPUT, FANOUT) appear after Complete Paths; skip them
-        if section == 'GATES' and (line.startswith('INPUT ') or line.startswith('OUTPUT ') or line.startswith('FANOUT ')):
+        if section == 'GATES' and any(line.startswith(p) for p in ('INPUT ','OUTPUT ','FANOUT ')):
             continue
-
         if section == 'INPUT':
-            for token in line.split():
-                inputs.extend(expand_vector(token))
-
+            for tok in line.split():
+                inputs.extend(expand_vector(tok))
         elif section == 'OUTPUT':
-            for token in line.split():
-                outputs.extend(expand_vector(token))
-
+            for tok in line.split():
+                outputs.extend(expand_vector(tok))
         elif section == 'FANOUT':
-            # COMMENTED OUT: we no longer use fanout in calculation
-            # parts = line.split()
-            # if len(parts) >= 2:
-            #     src = parts[1]
-            #     dsts = parts[2:]
-            #     fanout_list.append((src, dsts))
-            # else:
-            #     print(f"[WARN] Malformed FANOUT line @{lineno}: '{line}'", file=sys.stderr)
-            continue  # Skip FANOUT section entirely
-
+            # fanout_list parsing commented out
+            continue
         elif section == 'GATES':
             m = gate_re.match(line)
             if not m:
-                print(f"[WARN] Gate line skipped @{lineno}: '{line}'", file=sys.stderr)
+                print(f"[WARN] skipped @{lineno}: {line}", file=sys.stderr)
             else:
                 gtype = m.group(1)
-                out_nets = m.group(2).split()
-                in_nets = m.group(3).split()
-                for out_net in out_nets:
-                    gates_list.append((gtype, out_net, in_nets))
-
-    # Debug output
-    print("=== DEBUG: Parsed Sections ===")
-    print(f"Inputs  ({len(inputs)}): {inputs}")
-    print(f"Outputs ({len(outputs)}): {outputs}")
-    # print(f"Fanout  ({len(fanout_list)}): {fanout_list}")
-    print(f"Gates   ({len(gates_list)}): {gates_list}")
+                outs  = m.group(2).split()
+                ins   = m.group(3).split()
+                for o in outs:
+                    gates_list.append((gtype, o, ins))
+    print(f"=== DEBUG: Inputs={inputs}, Outputs={outputs}, Gates={len(gates_list)} ===")
     return inputs, outputs, fanout_list, gates_list
 
-
 def extract_wires(inputs, outputs, fanout_list, gates_list):
-    nets = set(inputs) | set(outputs)
-    for _, out_net, in_nets in gates_list:
-        nets.add(out_net)
-        nets.update(in_nets)
+    nets = set(inputs)|set(outputs)
+    for _, o, ins in gates_list:
+        nets.add(o); nets.update(ins)
     return sorted(nets)
 
 def build_controllability(nets, inputs, gates_list):
-    CC0 = {n: (1 if n in inputs else math.inf) for n in nets}
-    CC1 = {n: (1 if n in inputs else math.inf) for n in nets}
+    CC0 = {n:(1 if n in inputs else math.inf) for n in nets}
+    CC1 = {n:(1 if n in inputs else math.inf) for n in nets}
     changed = True
     while changed:
         changed = False
-        for gtype, out_net, in_nets in gates_list:
-            c0 = [CC0[n] for n in in_nets]
-            c1 = [CC1[n] for n in in_nets]
-            gt = gtype.upper()
-
+        for gtype,o,ins in gates_list:
+            c0=[CC0[n] for n in ins]; c1=[CC1[n] for n in ins]; gt=gtype.upper()
             try:
-                if 'NAND' in gt:
-                    new0, new1 = 1 + min(c0), 1 + sum(c1)
-                elif 'AND' in gt:
-                    new0, new1 = 1 + sum(c0), 1 + min(c1)
-                elif 'NOR' in gt:
-                    new0, new1 = 1 + sum(c1), 1 + min(c0)
-                elif 'OR' in gt:
-                    new0, new1 = 1 + min(c0), 1 + sum(c1)
-                elif 'XNOR' in gt and len(in_nets) == 2:
-                    a0, b0 = c0; a1, b1 = c1
-                    new0 = 1 + min(a0 + b0, a1 + b1)
-                    new1 = 1 + min(a0 + b1, a1 + b0)
-                elif 'XOR' in gt and len(in_nets) == 2:
-                    a0, b0 = c0; a1, b1 = c1
-                    new0 = 1 + min(a0 + b1, a1 + b0)
-                    new1 = 1 + min(a0 + b0, a1 + b1)
-                elif 'INV' in gt or 'NOT' in gt:
-                    new0 = 1 + c1[0]
-                    new1 = 1 + c0[0]
-                elif 'BUF' in gt:
-                    new0 = 1 + c0[0]
-                    new1 = 1 + c1[0]
-                else:
-                    new0 = 1 + c1[0]
-                    new1 = 1 + c0[0]
+                if 'NAND' in gt:              new0,new1=1+min(c0),1+sum(c1)
+                elif 'AND' in gt:             new0,new1=1+sum(c0),1+min(c1)
+                elif 'NOR' in gt:             new0,new1=1+sum(c1),1+min(c0)
+                elif 'OR' in gt:              new0,new1=1+min(c0),1+sum(c1)
+                elif 'XNOR' in gt and len(ins)==2:
+                                              a0,b0=c0; a1,b1=c1
+                                              new0=1+min(a0+b0,a1+b1)
+                                              new1=1+min(a0+b1,a1+b0)
+                elif 'XOR' in gt and len(ins)==2:
+                                              a0,b0=c0; a1,b1=c1
+                                              new0=1+min(a0+b1,a1+b0)
+                                              new1=1+min(a0+b0,a1+b1)
+                elif 'INV' in gt or 'NOT' in gt: new0, new1 = 1+c1[0], 1+c0[0]
+                elif 'BUF' in gt:               new0, new1 = 1+c0[0], 1+c1[0]
+                else:                           new0, new1 = 1+c1[0], 1+c0[0]
             except IndexError:
-                print(f"[ERROR] Invalid gate input count for {gtype} on {out_net}")
                 continue
-
-            if new0 < CC0[out_net]:
-                CC0[out_net] = new0; changed = True
-            if new1 < CC1[out_net]:
-                CC1[out_net] = new1; changed = True
-
-    control = {f'CC0_{n}': CC0[n] for n in nets}
-    control.update({f'CC1_{n}': CC1[n] for n in nets})
-    return control
+            if new0<CC0[o]: CC0[o],changed=new0,True
+            if new1<CC1[o]: CC1[o],changed=new1,True
+    ctrl={f"CC0_{n}":CC0[n] for n in nets}
+    ctrl.update({f"CC1_{n}":CC1[n] for n in nets})
+    return ctrl
 
 def build_observability(nets, outputs, fanout_list, control, gates_list):
-    CO = {n: (1 if n in outputs else math.inf) for n in nets}
-    changed = True
+    CO={n:(1 if n in outputs else math.inf) for n in nets}
+    changed=True
     while changed:
-        changed = False
-        for gtype, out_net, in_nets in gates_list:
-            coo = CO[out_net]
-            gt = gtype.upper()
-
+        changed=False
+        for gtype,o,ins in gates_list:
+            coo=CO[o]; gt=gtype.upper()
             try:
-                if len(in_nets) == 1:
-                    n1 = coo + 1
-                    if n1 < CO[in_nets[0]]:
-                        CO[in_nets[0]] = n1
-                        changed = True
+                if len(ins)==1:
+                    v=coo+1
+                    if v<CO[ins[0]]: CO[ins[0]],changed=v,True
                     continue
-
-                i1, i2 = in_nets[0], in_nets[1]
-                c0_i1, c1_i1 = control[f'CC0_{i1}'], control[f'CC1_{i1}']
-                c0_i2, c1_i2 = control[f'CC0_{i2}'], control[f'CC1_{i2}']
-
+                i1,i2=ins[0],ins[1]
+                c0_i1, c1_i1 = control[f"CC0_{i1}"], control[f"CC1_{i1}"]
+                c0_i2, c1_i2 = control[f"CC0_{i2}"], control[f"CC1_{i2}"]
                 if 'AND' in gt or 'NAND' in gt:
-                    n1 = coo + c1_i2 + 1
-                    n2 = coo + c1_i1 + 1
-                elif 'OR' in gt or 'NOR' in gt:
-                    n1 = coo + c0_i2 + 1
-                    n2 = coo + c0_i1 + 1
+                    n1,n2 = coo+c1_i2+1, coo+c1_i1+1
+                elif 'OR' in gt  or 'NOR' in gt:
+                    n1,n2 = coo+c0_i2+1, coo+c0_i1+1
                 elif 'XOR' in gt or 'XNOR' in gt:
-                    m = min(c0_i2 + c1_i2, c0_i1 + c1_i1)
-                    n1 = n2 = coo + m + 1
+                    m=min(c0_i2+c1_i2, c0_i1+c1_i1)
+                    n1=n2=coo+m+1
                 else:
-                    n1 = n2 = coo + 1
-
-                if n1 < CO[i1]:
-                    CO[i1] = n1; changed = True
-                if n2 < CO[i2]:
-                    CO[i2] = n2; changed = True
-
-            except IndexError:
-                print(f"[ERROR] Observability: Invalid inputs on {gtype}")
+                    n1=n2=coo+1
+                if n1<CO[i1]: CO[i1],changed=n1,True
+                if n2<CO[i2]: CO[i2],changed=n2,True
+            except:
                 continue
-
-    return {f'CO_{n}': CO[n] for n in nets}
+    return {f"CO_{n}":CO[n] for n in nets}
 
 def write_scoap(control, observ, filename):
-    try:
-        with open(filename, 'w') as f:
-            f.write("--- SCOAP CONTROLLABILITY (CC0) ---\n")
-            for k in sorted(control):
-                if k.startswith('CC0_'):
-                    f.write(f"{k}: {control[k]}\n")
-            f.write("\n--- SCOAP CONTROLLABILITY (CC1) ---\n")
-            for k in sorted(control):
-                if k.startswith('CC1_'):
-                    f.write(f"{k}: {control[k]}\n")
-            f.write("\n--- SCOAP OBSERVABILITY (CO) ---\n")
-            for k in sorted(observ):
-                f.write(f"{k}: {observ[k]}\n")
-        print(f"SCOAP results written to {filename}")
-    except IOError as e:
-        print(f"Error writing SCOAP file: {e}", file=sys.stderr)
+    with open(filename,'w') as f:
+        f.write("--- SCOAP CONTROLLABILITY (CC0) ---\n")
+        for k in sorted(control):
+            if k.startswith("CC0_"): f.write(f"{k}: {control[k]}\n")
+        f.write("\n--- SCOAP CONTROLLABILITY (CC1) ---\n")
+        for k in sorted(control):
+            if k.startswith("CC1_"): f.write(f"{k}: {control[k]}\n")
+        f.write("\n--- SCOAP OBSERVABILITY (CO) ---\n")
+        for k in sorted(observ):
+            f.write(f"{k}: {observ[k]}\n")
+    print(f"SCOAP results written to {filename}")
+
+def dump_json(control, observ, inputs, outputs, gates_list, output_path):
+    from math import isinf
+    data = {"primary_inputs":inputs, "primary_outputs":outputs, "gates":[]}
+
+    # actual gates
+    for idx,(gtype,o,ins) in enumerate(gates_list):
+        name = o if o.startswith("UNCONNECTED") else f"{gtype}_{idx}"
+        gi = {
+            "name": name,
+            "type": gtype,
+            "inputs": ins,
+            "output": o,
+            "cc0": control.get(f"CC0_{o}"),
+            "cc1": control.get(f"CC1_{o}"),
+            "co":  observ.get(f"CO_{o}", math.inf)
+        }
+        for k in ("cc0","cc1","co"):
+            v=gi[k]
+            gi[k] = "NA" if v is None else ("Infinity" if isinstance(v,float) and isinf(v) else v)
+        data["gates"].append(gi)
+
+    # standalone PIs/POs
+    for net in sorted(set(inputs+outputs)):
+        gi = {
+            "name": net, "type":"NET", "inputs":[], "output":net,
+            "cc0": control.get(f"CC0_{net}"),
+            "cc1": control.get(f"CC1_{net}"),
+            "co":  observ.get(f"CO_{net}", math.inf)
+        }
+        for k in ("cc0","cc1","co"):
+            v=gi[k]
+            gi[k] = "NA" if v is None else ("Infinity" if isinstance(v,float) and isinf(v) else v)
+        data["gates"].append(gi)
+
+    with open(output_path,'w') as f:
+        json.dump(data,f,indent=4)
+    print(f"[✓] JSON SCOAP written to {output_path}")
+
+def reconstruct_fanouts(gates_list):
+    fmap=defaultdict(list)
+    for _,o,ins in gates_list:
+        for i in ins: fmap[i].append(o)
+    return list(fmap.items())
 
 def main():
-    if len(sys.argv) != 2:
-        print("Usage: python scoap_calculator.py path/to/out.txt", file=sys.stderr)
+    if len(sys.argv)<2 or len(sys.argv)>3:
+        print("Usage: python scoap_calculator.py out.txt [--json]",file=sys.stderr)
         sys.exit(1)
-    in_path = sys.argv[1]
-    lines = read_netlist(in_path)
-    inputs, outputs, fanout_list, gates_list = parse_sections(lines)
-    nets = extract_wires(inputs, outputs, fanout_list, gates_list)
-    control = build_controllability(nets, inputs, gates_list)
-    observ = build_observability(nets, outputs, fanout_list, control, gates_list)
-    script_dir = os.path.dirname(os.path.abspath(__file__))
-    out_file = os.path.join(script_dir, 'scoap_out.txt')
-    write_scoap(control, observ, out_file)
+    path=sys.argv[1]
+    want_json = "--json" in sys.argv
 
-if __name__ == '__main__':
+    lines=read_netlist(path)
+    inputs,outputs,fanout_list,gates_list = parse_sections(lines)
+    # fanout_list is unused/commented
+    if not fanout_list:
+        fanout_list = reconstruct_fanouts(gates_list)
+
+    nets = extract_wires(inputs,outputs,fanout_list,gates_list)
+    ctrl = build_controllability(nets,inputs,gates_list)
+    obs  = build_observability(nets,outputs,fanout_list,ctrl,gates_list)
+
+    base=os.path.dirname(os.path.abspath(__file__))
+    write_scoap(ctrl,obs, os.path.join(base,"scoap_out.txt"))
+    if want_json:
+        dump_json(ctrl,obs,inputs,outputs,gates_list,os.path.join(base,"scoap_out.json"))
+
+if __name__=="__main__":
     main()
