@@ -101,7 +101,7 @@ This saves results in `scoapout/`.
 ### 3. Run Netlist Parser
 
 ```bash
-python3 main.py --parse raw_netlist.txt
+python3 main.py --parse raw_netlist.txt outputfilename.v
 ```
 
 This saves the parsed netlist in `parsednetlist/`.
@@ -112,21 +112,14 @@ This saves the parsed netlist in `parsednetlist/`.
 OpenTestability/
 ├── code/
 │   ├── __init__.py
-│   ├── parser.py           # Parses raw gate-level netlists into internal format
+│   ├── parser.py           # Parses raw gate-level netlists
 │   ├── scoap.py            # Computes combinational SCOAP metrics
-│   ├── reconvergence.py    # Reconvergent fanout detection logic
-│   ├── dag_builder.py      # Builds DAG using NetworkX from parsed netlist
-│   └── utils.py            # Utility functions for file I/O, name cleaning, etc.
-├── parsednetlist/          # Output directory for parsed netlists
-├── scoapout/               # Output directory for SCOAP metric results
-├── data/
-│   └── sample_netlist.txt  # Example input gate-level netlist
-├── examples/
-│   └── demo_scoap_run.py   # Example usage script
-├── tests/
-│   ├── test_parser.py      # Unit tests for the parser module
-│   ├── test_scoap.py       # Unit tests for SCOAP calculations
-│   └── test_dag.py         # Unit tests for DAG builder
+│   ├── DAG.py              # Reconvergent fanout detection logic
+│   ├── parsednetlist/      # Output directory for parsed netlists
+│   ├── scoapout/           # Output directory for SCOAP metric results
+│   └── netlist/
+│       └── priority_encoder.v  # Example input gate-level netlist
+├── EXTRAS/                 # Contains design files and genus script
 ├── main.py                 # Main CLI entry point
 ├── requirements.txt        # Python dependencies
 ├── README.md               # Project overview and usage guide
@@ -141,7 +134,7 @@ The main entry point is `main.py`.
 ### Parse a Netlist
 
 ```bash
-python3 main.py --parse raw_netlist.txt
+python3 main.py --parse -i raw_netlist.v -o out.txt
 ```
 
 Parsed file will be saved to `parsednetlist/`.
@@ -149,18 +142,23 @@ Parsed file will be saved to `parsednetlist/`.
 ### Run SCOAP Analysis
 
 ```bash
-python3 main.py --scoap parsednetlist/my_parsed.txt -o scoap_result.json
+python3 main.py --scoap -i <input.v > -o scoap_result.json|txt
 ```
 
 JSON results are saved to `scoapout/`.
 
 ### Argument Summary
+### Argument Summary
 
-| Flag             | Description                                        | Example                             |
-|------------------|----------------------------------------------------|-------------------------------------|
-| `--parse`        | Parse a raw gate-level netlist                     | `--parse raw_netlist.txt`           |
-| `--scoap`        | Run SCOAP analysis on parsed netlist               | `--scoap parsednetlist/file.txt`    |
-| `-o`             | Output file name for SCOAP metrics (JSON)          | `-o scoap_result.json`              |
+| Flag             | Description                                        | Example                                          |
+|------------------|----------------------------------------------------|--------------------------------------------------|
+| `--parse`        | Parse a raw gate-level netlist                     | `--parse -i raw_netlist.v -o out.txt`            |
+| `--scoap`        | Run SCOAP analysis on parsed netlist               | `--scoap -i <input.v> -o scoap_result.json|txt`  |
+| `-i, --input`    | Specify input file path                            | `-i netlist/my_design.v`                         |
+| `-o, --output`   | Specify output file name                           | `-o analysis_results.json`                       |
+| `--format`       | Output format (json or txt)                        | `--format json`                                  |
+| `--verbose`      | Enable detailed logging                            | `--verbose`                                      |
+| `--help`         | Show help message and exit                         | `--help`                                         |
 
 ## 🤝 Contributing
 
