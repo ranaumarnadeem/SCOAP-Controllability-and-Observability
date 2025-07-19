@@ -1,68 +1,82 @@
 import json
 import os
-import networkx as nx
 import sys
+import networkx as nx
+import matplotlib.pyplot as plt
 
-from collections import deque
+def load_dag_json(json_file):
+    json_dir = os.path.join("parsednetlist", "dagoutput")
+    json_path = os.path.join(json_dir, json_file)
 
-def load_json(json_path):
+    if not os.path.exists(json_path):
+        print(f"[ERROR] JSON file not found at: {json_path}")
+        sys.exit(1)
+
     with open(json_path, 'r') as f:
         return json.load(f)
 
-def build_dag(json_data):
+def categorize_node(node_name):
+    if node_name.startswith("in["):
+        return "input"
+    elif node_name.startswith("out[") or node_name in ["valid"]:
+        return "output"
+    else:
+        return "gate"
+
+def visualize_dag(dag_data, title="Gate-Level DAG", output_file=None):
+    try:
+        from networkx.drawing.nx_agraph import graphviz_layout
+        pos = graphviz_layout(nx.DiGraph(dag_data["edges"]), prog="dot")
+    except ImportError:
+        print("[WARN] pygraphviz not installed. Using spring layout.")
+        pos = nx.spring_layout(nx.DiGraph(dag_data["edges"]), k=0.5, iterations=100)
+
     G = nx.DiGraph()
-    for gate in json_data["gates"]:
-        out_net = gate["output"]
-        in_nets = gate["inputs"]
-        for net in in_nets:
-            G.add_edge(net, out_net)
-    return G
+    G.add_edges_from(dag_data["edges"])
+    labels = dag_data.get("labels", {})
+    node_labels = {node: labels.get(node, node) for node in G.nodes}
 
-def find_unvisited_nodes(G):
-    return [node for node in G.nodes if G.in_degree(node) == 0 and G.out_degree(node) == 0]
+    # Assign node colors
+    color_map = []
+    for node in G.nodes:
+        cat = categorize_node(node)
+        if cat == "input":
+            color_map.append("#90ee90")  # light green
+        elif cat == "output":
+            color_map.append("#ff7f7f")  # light red
+        else:
+            color_map.append("#add8e6")  # light blue
 
-def write_dag_json(G, out_path):
-    data = {
-        "edges": list(G.edges())
-    }
-    with open(out_path, 'w') as f:
-        json.dump(data, f, indent=2)
+    plt.figure(figsize=(18, 12), facecolor='white')
+    nx.draw_networkx_nodes(G, pos, node_color=color_map, node_size=700, edgecolors='black', linewidths=0.5)
+    nx.draw_networkx_edges(G, pos, edge_color='gray', arrows=True, arrowstyle='-|>', connectionstyle='arc3,rad=0.1')
+    nx.draw_networkx_labels(G, pos, labels=node_labels, font_size=7)
 
-def write_unvisited_nodes_json(unvisited, out_path):
-    with open(out_path, 'w') as f:
-        json.dump({"unvisited_nodes": unvisited}, f, indent=2)
+    plt.title(title)
+    plt.axis('off')
+    plt.tight_layout()
+
+    if output_file:
+        plt.savefig(output_file, dpi=300, facecolor='white')
+        print(f"[INFO] DAG image saved as: {output_file}")
+
+    try:
+        plt.show()
+    except:
+        print("[WARN] Plot could not be displayed in this environment.")
 
 def main():
-    if len(sys.argv) < 2:
-        print("Usage: python3 DAG.py <netlist_json_filename>")
+    if len(sys.argv) != 2:
+        print("Usage: python3 graph.py <json_filename>")
         sys.exit(1)
 
-    filename = sys.argv[1]
-    if not filename.endswith(".json"):
-        print("Please provide a JSON filename.")
-        sys.exit(1)
+    json_file = sys.argv[1]
+    dag_data = load_dag_json(json_file)
 
-    script_dir = os.path.dirname(os.path.abspath(__file__))
-    parsed_dir = os.path.join(script_dir, "parsednetlist")
-    output_dir = os.path.join(parsed_dir, "dagoutput")
-    os.makedirs(output_dir, exist_ok=True)
+    base = os.path.splitext(json_file)[0]
+    out_file = os.path.join("parsednetlist", "dagoutput", f"{base}_dag.png")
 
-    json_path = os.path.join(parsed_dir, filename)
-    base_name = os.path.splitext(filename)[0]
-
-    dag_json_path = os.path.join(output_dir, f"{base_name}_dag_edges.json")
-    unvisited_json_path = os.path.join(output_dir, f"{base_name}_unvisited_nodes.json")
-
-    data = load_json(json_path)
-    G = build_dag(data)
-
-    unvisited = find_unvisited_nodes(G)
-
-    write_dag_json(G, dag_json_path)
-    write_unvisited_nodes_json(unvisited, unvisited_json_path)
-
-    print(f"DAG edges written to {dag_json_path}")
-    print(f"Unvisited nodes written to {unvisited_json_path}")
+    visualize_dag(dag_data, f"DAG: {json_file}", out_file)
 
 if __name__ == "__main__":
     main()
