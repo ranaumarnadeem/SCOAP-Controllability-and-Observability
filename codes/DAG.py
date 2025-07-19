@@ -1,6 +1,8 @@
 import json
 import os
 import networkx as nx
+import sys
+
 from collections import deque
 
 def load_json(json_path):
@@ -16,58 +18,51 @@ def build_dag(json_data):
             G.add_edge(net, out_net)
     return G
 
+def find_unvisited_nodes(G):
+    return [node for node in G.nodes if G.in_degree(node) == 0 and G.out_degree(node) == 0]
 
-def find_fanouts(G):
-    return [node for node in G.nodes if G.out_degree(node) > 1]
-
-def find_reconvergences(G):
-    return [node for node in G.nodes if G.in_degree(node) > 1]
-
-def bfs_paths(G, start, end, max_depth=10):
-    paths = []
-    queue = deque([(start, [start])])
-    while queue:
-        (node, path) = queue.popleft()
-        if node == end:
-            paths.append(path)
-        elif len(path) < max_depth:
-            for next_node in G.successors(node):
-                if next_node not in path:
-                    queue.append((next_node, path + [next_node]))
-    return paths
-
-def write_unvisited_nodes(G, out_path):
-    unvisited = [node for node in G.nodes if G.in_degree(node) == 0 and G.out_degree(node) == 0]
+def write_dag_json(G, out_path):
+    data = {
+        "edges": list(G.edges())
+    }
     with open(out_path, 'w') as f:
-        for node in unvisited:
-            f.write(f"{node}\n")
+        json.dump(data, f, indent=2)
 
-def write_fanout_reconvergence_paths(G, fanouts, reconvergences, out_path):
+def write_unvisited_nodes_json(unvisited, out_path):
     with open(out_path, 'w') as f:
-        for f_node in fanouts:
-            for r_node in reconvergences:
-                if nx.has_path(G, f_node, r_node):
-                    paths = bfs_paths(G, f_node, r_node)
-                    for path in paths:
-                        f.write(f"Fanout: {f_node}, Reconvergence: {r_node}, Path: {' -> '.join(path)}\n")
+        json.dump({"unvisited_nodes": unvisited}, f, indent=2)
 
 def main():
+    if len(sys.argv) < 2:
+        print("Usage: python3 DAG.py <netlist_json_filename>")
+        sys.exit(1)
+
+    filename = sys.argv[1]
+    if not filename.endswith(".json"):
+        print("Please provide a JSON filename.")
+        sys.exit(1)
+
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    json_path = os.path.join(script_dir, "scoap_out.json")
-    unvisited_file = os.path.join(script_dir, "unvisited_nodes.txt")
-    fanout_path_file = os.path.join(script_dir, "fanout_reconvergence_paths.txt")
+    parsed_dir = os.path.join(script_dir, "parsednetlist")
+    output_dir = os.path.join(parsed_dir, "dagoutput")
+    os.makedirs(output_dir, exist_ok=True)
+
+    json_path = os.path.join(parsed_dir, filename)
+    base_name = os.path.splitext(filename)[0]
+
+    dag_json_path = os.path.join(output_dir, f"{base_name}_dag_edges.json")
+    unvisited_json_path = os.path.join(output_dir, f"{base_name}_unvisited_nodes.json")
 
     data = load_json(json_path)
     G = build_dag(data)
 
-    fanouts = find_fanouts(G)
-    reconvergences = find_reconvergences(G)
+    unvisited = find_unvisited_nodes(G)
 
-    write_unvisited_nodes(G, unvisited_file)
-    write_fanout_reconvergence_paths(G, fanouts, reconvergences, fanout_path_file)
+    write_dag_json(G, dag_json_path)
+    write_unvisited_nodes_json(unvisited, unvisited_json_path)
 
-    print("Unvisited nodes written to unvisited_nodes.txt")
-    print("Fanout and reconvergence paths written to fanout_reconvergence_paths.txt")
+    print(f"DAG edges written to {dag_json_path}")
+    print(f"Unvisited nodes written to {unvisited_json_path}")
 
 if __name__ == "__main__":
     main()

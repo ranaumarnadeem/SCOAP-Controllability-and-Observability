@@ -1,0 +1,144 @@
+{
+    "gates": [
+        {
+            "type": "CLKINVX1",
+            "output": "out[0]",
+            "inputs": [
+                "n_15"
+            ]
+        },
+        {
+            "type": "OAI21X1",
+            "output": "n_15",
+            "inputs": [
+                "in[7]",
+                "n_14",
+                "en"
+            ]
+        },
+        {
+            "type": "NOR2X1",
+            "output": "n_14",
+            "inputs": [
+                "in[6]",
+                "n_11"
+            ]
+        },
+        {
+            "type": "AOI21X1",
+            "output": "out[1]",
+            "inputs": [
+                "n_2",
+                "n_6",
+                "n_0"
+            ]
+        },
+        {
+            "type": "AND2X2",
+            "output": "valid",
+            "inputs": [
+                "en",
+                "n_10"
+            ]
+        },
+        {
+            "type": "NOR2X1",
+            "output": "n_11",
+            "inputs": [
+                "in[5]",
+                "n_9"
+            ]
+        },
+        {
+            "type": "OR4X2",
+            "output": "n_10",
+            "inputs": [
+                "in[0]",
+                "in[1]",
+                "n_4",
+                "n_7"
+            ]
+        },
+        {
+            "type": "NOR2X1",
+            "output": "n_9",
+            "inputs": [
+                "in[4]",
+                "n_5"
+            ]
+        },
+        {
+            "type": "AND2X2",
+            "output": "out[2]",
+            "inputs": [
+                "en",
+                "n_7"
+            ]
+        },
+        {
+            "type": "OR3X1",
+            "output": "n_6",
+            "inputs": [
+                "in[5]",
+                "in[4]",
+                "n_3"
+            ]
+        },
+        {
+            "type": "AOI21X1",
+            "output": "n_5",
+            "inputs": [
+                "in[1]",
+                "n_1",
+                "in[3]"
+            ]
+        },
+        {
+            "type": "INVX1",
+            "output": "n_4",
+            "inputs": [
+                "n_3"
+            ]
+        },
+        {
+            "type": "OR4X2",
+            "output": "n_7",
+            "inputs": [
+                "in[6]",
+                "in[7]",
+                "in[4]",
+                "in[5]"
+            ]
+        },
+        {
+            "type": "NOR2X1",
+            "output": "n_3",
+            "inputs": [
+                "in[2]",
+                "in[3]"
+            ]
+        },
+        {
+            "type": "NOR2X1",
+            "output": "n_2",
+            "inputs": [
+                "in[6]",
+                "in[7]"
+            ]
+        },
+        {
+            "type": "CLKINVX1",
+            "output": "n_1",
+            "inputs": [
+                "in[2]"
+            ]
+        },
+        {
+            "type": "CLKINVX1",
+            "output": "n_0",
+            "inputs": [
+                "en"
+            ]
+        }
+    ]
+}
