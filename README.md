@@ -11,10 +11,12 @@ OpenTestability is an open-source Python framework for analyzing testability in 
 
 Originally a personal project, OpenTestability is now a growing tool aimed at researchers, students, and DFT engineers who want to understand or evaluate the testability of synthesized netlists easily without expensive licensing.
 
-![License](https://img.shields.io/github/license/ranaumarnadeem/OpenTestability)
-![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
-![Issues](https://img.shields.io/github/issues/ranaumarnadeem/OpenTestability)
-![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen)
+[![License](https://img.shields.io/github/license/ranaumarnadeem/OpenTestability)](https://github.com/ranaumarnadeem/OpenTestability/blob/main/LICENSE)
+[![Python](https://img.shields.io/badge/Python-3.8%2B-blue)](https://www.python.org/downloads/)
+[![Issues](https://img.shields.io/github/issues/ranaumarnadeem/OpenTestability)](https://github.com/ranaumarnadeem/OpenTestability/issues)
+[![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen)](https://github.com/ranaumarnadeem/OpenTestability/blob/main/CONTRIBUTING.md)
+
+
 
 ## Features
 
