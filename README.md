@@ -1,129 +1,229 @@
-# 🔍 Verilog Netlist Parser for DFT Automation
+# OpenTestability
 
-This project provides a **robust parser for Verilog netlists** aimed at **Design-for-Testability (DFT)** research and automation. It is specifically built to handle **gate-level netlists** (output of tools like Synopsys Genus, IC Compiler, etc.) and extract the following:
+**Comprehensive Gate-Level Testability Metric Analyzer**
 
-- **Logic gates** with output/input nets
-- **Flip-flops**
-- **Primary Inputs and Outputs**
-- **Internal wires**
-- **Fan-in and Fan-out nets**
+OpenTestability is an open-source Python framework for analyzing testability in gate-level digital designs. It currently supports **SCOAP (Sandia Controllability/Observability Analysis Program)** for combinational circuits and is actively being extended to include:
 
-> 📌 **Note**: This project is still under active development. The next milestone is integrating a **Controllability and Observability (COP/SCOAP)** calculator by adapting the work of [Dr. Rathnamala Rao](https://github.com/rathnamala-rao), whose SCOAP calculator has been forked for this purpose.
+- Reconvergent Fanout Detection  
+- Cycle Observability Probability (COP)  
+- Path Distance Metrics  
+- Sequential Testability Analysis
 
----
+Originally a personal project, OpenTestability is now a growing tool aimed at researchers, students, and DFT engineers who want to understand or evaluate the testability of synthesized netlists easily without expensive licensing.
 
-## 🧠 Motivation
+![License](https://img.shields.io/github/license/ranaumarnadeem/OpenTestability)
+![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
+![Issues](https://img.shields.io/github/issues/ranaumarnadeem/OpenTestability)
+![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen)
 
-Gate-level netlists from tools like Genus or IC Compiler use a Verilog format that is **not directly compatible with most DFT tools or academic SCOAP calculators**.
+## Features
 
-- Netlist structure varies widely depending on the tool.
-- Existing COP/SCOAP tools require manually reformatted inputs.
-  
-This parser **bridges the gap** between standard tool output and academic DFT metric calculators.
+OpenTestability is an open source Python-based toolkit designed to analyze and improve the testability of gate-level netlists. It currently supports:
 
----
+### Implemented
 
-## 📦 Features
+- Combinational SCOAP Metrics: Calculates CC0 (Controllability to 0), CC1 (Controllability to 1), and CO (Observability)
+- Netlist Parser: Converts Synopsys DC / Cadence Genus outputs into a clean intermediate format
+- Graph Representation: Uses NetworkX to build a Directed Acyclic Graph (DAG) from the netlist
 
-### ✅ Verilog Netlist Parsing
-- Supports standard gate-level Verilog.
-- Parses all modules, instances, wires, and ports.
+### In Development
 
-### ✅ DFT-Friendly Summary Output
-The parsed summary (`out.txt`) includes:
+- Reconvergent Fanout Detection: Identifies complex reconvergent paths which hinder test coverage
+- Cycle Observability Probability (COP): Statistical estimation of signal visibility at output ports
+- Distance Metrics: Compute logic depth from inputs to outputs or between FFs
+- Sequential Testability Metrics: SCOAP extensions for sequential circuits using latch/FF awareness
+- Visualization: Fanout cones and DAGs using Graphviz
 
-- `# Primary Inputs`: All PI nets (e.g., `g1`, `CK`, etc.)
-- `# Primary Outputs`: All PO nets
-- `# FAN IN`: Nets that are used as inputs to multiple components
-- `# FAN OUT`: Nets that drive multiple destinations
-- `# Complete Paths`: Detailed gate-wise listing:
+### Designed for Researchers and Students
 
-- `# Complete Paths`: Detailed gate-wise listing:
-NAND out(g1243) in(g1244 g1245)
-DFF out(q1) in(d1 clk)
-...
+OpenTestability is modular and readable, aiming to serve as a learning platform as well as a research-grade tool.
 
+## Use Cases
 
----
+- Evaluate the testability of ASIC or SoC blocks post-synthesis.
+- Identify weakly observable or hard-to-control nodes for DFT improvement.
+- Assist in placement of scan chain elements by highlighting low-SCOAP areas.
+- Analyze reconverging fanouts for ATPG and fault coverage enhancement.
+- Use as a teaching/research tool in VLSI and DFT coursework.
 
-## 📂 File Output Format
+## 📦 Installation
 
-The `out.txt` file is structured into labeled sections for easy parsing and analysis:
+Before running OpenTestability, make sure you have the following installed:
 
-```verilog
-# Primary Inputs
-g1 g2 g3 ...
+- Python 3.8+
+- pip (Python package manager)
+- (Optional) Graphviz for visualization support
 
-# Primary Outputs
-g100 g101 ...
+### 1. Clone the Repository
 
-# FAN IN
-g45
-g46
-
-
-# FAN OUT
-FANOUT g50 g60 g61 g62
-
-# Complete Paths
-NAND out(g1243) in(g1244 g1245)
-DFF out(q1) in(d1 clk)
+```bash
+git clone https://github.com/ranaumarnadeem/OpenTestability.git
+cd OpenTestability
 ```
----
 
-## 🛠️ Technologies
+### 2. Install Dependencies
 
-- **Python 3**
-- [Pyverilog](https://github.com/PyHDI/Pyverilog) – Verilog parser
-- Regex and AST traversal
----
+```bash
+pip install -r requirements.txt
+```
 
-## 🚧 Next Milestone: SCOAP Integration
+### 3. (Optional) Install Graphviz
 
-The parser is being extended to feed data directly into a **SCOAP calculator** for:
-- **Controllability (CC0/CC1)**
-- **Observability (CO)**
+#### On Ubuntu/Debian:
+```bash
+sudo apt-get install graphviz
+```
 
-The calculator originally developed by Dr. Rathnamala Rao has been forked. This version will be modified to:
-- Accept `out.txt` or in-memory netlist graph from this parser.
-- Provide a direct and accurate SCOAP metric dump.
+#### On macOS:
+```bash
+brew install graphviz
+```
 
----
+#### On Windows:
+Download from https://graphviz.org/download/
 
+## 🚀 Quick Start
+
+### 1. Prepare Your Netlist
+
+Ensure your gate-level netlist is exported from tools like Genus or Synopsys DC. You may need to run the parser to convert it into the accepted format. Some samples are already available in the `data/` directory.
+
+### 2. Run SCOAP Metric Generator
+
+```bash
+python3 main.py --scoap parsednetlist/my_parsed.txt -o scoap_result.json
+```
+
+This saves results in `scoapout/`.
+
+### 3. Run Netlist Parser
+
+```bash
+python3 main.py --parse raw_netlist.txt
+```
+
+This saves the parsed netlist in `parsednetlist/`.
+
+## 📁 Project Structure
+
+```
+OpenTestability/
+├── code/
+│   ├── __init__.py
+│   ├── parser.py           # Parses raw gate-level netlists into internal format
+│   ├── scoap.py            # Computes combinational SCOAP metrics
+│   ├── reconvergence.py    # Reconvergent fanout detection logic
+│   ├── dag_builder.py      # Builds DAG using NetworkX from parsed netlist
+│   └── utils.py            # Utility functions for file I/O, name cleaning, etc.
+├── parsednetlist/          # Output directory for parsed netlists
+├── scoapout/               # Output directory for SCOAP metric results
+├── data/
+│   └── sample_netlist.txt  # Example input gate-level netlist
+├── examples/
+│   └── demo_scoap_run.py   # Example usage script
+├── tests/
+│   ├── test_parser.py      # Unit tests for the parser module
+│   ├── test_scoap.py       # Unit tests for SCOAP calculations
+│   └── test_dag.py         # Unit tests for DAG builder
+├── main.py                 # Main CLI entry point
+├── requirements.txt        # Python dependencies
+├── README.md               # Project overview and usage guide
+├── CONTRIBUTING.md         # Contribution guidelines
+└── LICENSE                 # Open-source license
+```
+
+## 🚀 Usage
+
+The main entry point is `main.py`.
+
+### Parse a Netlist
+
+```bash
+python3 main.py --parse raw_netlist.txt
+```
+
+Parsed file will be saved to `parsednetlist/`.
+
+### Run SCOAP Analysis
+
+```bash
+python3 main.py --scoap parsednetlist/my_parsed.txt -o scoap_result.json
+```
+
+JSON results are saved to `scoapout/`.
+
+### Argument Summary
+
+| Flag             | Description                                        | Example                             |
+|------------------|----------------------------------------------------|-------------------------------------|
+| `--parse`        | Parse a raw gate-level netlist                     | `--parse raw_netlist.txt`           |
+| `--scoap`        | Run SCOAP analysis on parsed netlist               | `--scoap parsednetlist/file.txt`    |
+| `-o`             | Output file name for SCOAP metrics (JSON)          | `-o scoap_result.json`              |
 
 ## 🤝 Contributing
 
-Contributions are welcome! You can:
-- Add support for more Verilog constructs (e.g., more FF types, buffers).
-- Optimize fanin/fanout analysis using graph traversal.
-- Add JSON output mode for integration with other DFT tools.
-- Help convert the `out.txt` format into a SCOAP input graph.
+We welcome all kinds of contributions—from fixing bugs and writing tests to suggesting new features.
 
-To contribute:
-1. Fork this repo
-2. Create a new branch (`feature-x`)
-3. Commit your changes
-4. Open a PR 🎉
+### How to Contribute
+
+1. Fork and clone the repository:
+   ```bash
+   git clone https://github.com/your-username/OpenTestability.git
+   cd OpenTestability
+   ```
+
+2. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. Create a new branch:
+   ```bash
+   git checkout -b my-feature
+   ```
+
+4. Make your changes, add tests, and commit:
+   ```bash
+   git commit -m "Add: My awesome feature"
+   ```
+
+5. Push and open a pull request:
+   ```bash
+   git push origin my-feature
+   ```
+
+### Code Guidelines
+
+- Follow [PEP8](https://peps.python.org/pep-0008/)
+- Add docstrings and keep logic modular
+- Keep CLI consistent and testable
+
+### Running Tests
+
+```bash
+pytest tests/
+```
+
+### We're Especially Looking For:
+
+- Sequential SCOAP support
+- COP and distance metric algorithms
+- Reconvergence graph improvements
+- DAG/metric visualizations
+- Fault simulation logic
+
+## 📄 License
+
+This project is licensed under the **MIT License**.
+
+You are free to:
+
+- ✅ Use it for commercial or personal purposes  
+- 🛠 Modify and distribute the source code  
+- 🔗 Include it in proprietary software (with attribution)
+
+See the [LICENSE](./LICENSE) file for full terms.
 
 ---
 
-## 🧪 Example
-
-Given the following Verilog gate-level instance:
-
-```verilog
-NAND2X1 U1 ( .A(g3), .B(g4), .Y(g5) );
-NAND out(g5) in(g3 g4)
-```
-
-In case of Flip-Flop
-
-```verilog
-DFFPOSX1 D1 ( .D(g1), .CLK(clk), .Q(g2) );
-DFF out(g2) in(g1 clk)
-```
-
----
-## 📫 Contact
-For questions, feel free to raise an Issue or contact the maintainer.
-
+Whether you're using this for class, research, or chip tapeout—thank you for checking out OpenTestability!
