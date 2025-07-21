@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 import argparse
 import sys
-from opentestability.parser import parse as run_parse
-from opentestability.scoap import run as run_scoap
+from codes.parser import parse as run_parse
+from codes.scoap import run as run_scoap
 
 def main():
     p = argparse.ArgumentParser(description="OpenTestability CLI")
@@ -17,7 +17,7 @@ def main():
     p.add_argument('--json', action='store_true',
                    help="(SCOAP only) also emit JSON output alongside text")
 
-    args = p.parse_args()
+    args = p.parse_args() 
 
     try:
         if args.parse:

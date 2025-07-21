@@ -1,0 +1,606 @@
+{
+    "gates": [
+        {
+            "type": "DFFRX1",
+            "output": "zero",
+            "inputs": [
+                "n_58",
+                "clk",
+                "n_59"
+            ]
+        },
+        {
+            "type": "DFFRX1",
+            "output": "UNCONNECTED",
+            "inputs": [
+                "n_58",
+                "clk",
+                "n_59"
+            ]
+        },
+        {
+            "type": "NOR4X1",
+            "output": "n_59",
+            "inputs": [
+                "result[1]",
+                "result[2]",
+                "result[0]",
+                "result[3]"
+            ]
+        },
+        {
+            "type": "DFFRX1",
+            "output": "result[3]",
+            "inputs": [
+                "n_58",
+                "clk",
+                "n_57"
+            ]
+        },
+        {
+            "type": "DFFRX1",
+            "output": "UNCONNECTED0",
+            "inputs": [
+                "n_58",
+                "clk",
+                "n_57"
+            ]
+        },
+        {
+            "type": "DFFRX1",
+            "output": "carry",
+            "inputs": [
+                "n_58",
+                "clk",
+                "n_56"
+            ]
+        },
+        {
+            "type": "DFFRX1",
+            "output": "UNCONNECTED1",
+            "inputs": [
+                "n_58",
+                "clk",
+                "n_56"
+            ]
+        },
+        {
+            "type": "OAI21X1",
+            "output": "n_57",
+            "inputs": [
+                "n_52",
+                "n_39",
+                "n_54"
+            ]
+        },
+        {
+            "type": "INVX1",
+            "output": "n_56",
+            "inputs": [
+                "n_55"
+            ]
+        },
+        {
+            "type": "DFFRX1",
+            "output": "result[2]",
+            "inputs": [
+                "n_58",
+                "clk",
+                "n_53"
+            ]
+        },
+        {
+            "type": "DFFRX1",
+            "output": "UNCONNECTED2",
+            "inputs": [
+                "n_58",
+                "clk",
+                "n_53"
+            ]
+        },
+        {
+            "type": "AOI221X1",
+            "output": "n_55",
+            "inputs": [
+                "carry",
+                "opcode[1]",
+                "n_34",
+                "n_45",
+                "n_50"
+            ]
+        },
+        {
+            "type": "AOI222X1",
+            "output": "n_54",
+            "inputs": [
+                "n_47",
+                "n_41",
+                "opcode[1]",
+                "n_40",
+                "n_46",
+                "n_51"
+            ]
+        },
+        {
+            "type": "OAI21X1",
+            "output": "n_53",
+            "inputs": [
+                "n_52",
+                "n_29",
+                "n_48"
+            ]
+        },
+        {
+            "type": "DFFRX1",
+            "output": "result[1]",
+            "inputs": [
+                "n_58",
+                "clk",
+                "n_44"
+            ]
+        },
+        {
+            "type": "DFFRX1",
+            "output": "UNCONNECTED3",
+            "inputs": [
+                "n_58",
+                "clk",
+                "n_44"
+            ]
+        },
+        {
+            "type": "CLKXOR2X1",
+            "output": "n_51",
+            "inputs": [
+                "n_49",
+                "n_38"
+            ]
+        },
+        {
+            "type": "AOI211X1",
+            "output": "n_50",
+            "inputs": [
+                "n_11",
+                "n_49",
+                "n_16",
+                "n_43"
+            ]
+        },
+        {
+            "type": "AOI222X1",
+            "output": "n_48",
+            "inputs": [
+                "n_47",
+                "n_23",
+                "opcode[1]",
+                "n_21",
+                "n_46",
+                "n_36"
+            ]
+        },
+        {
+            "type": "INVX1",
+            "output": "n_45",
+            "inputs": [
+                "n_42"
+            ]
+        },
+        {
+            "type": "OAI21X1",
+            "output": "n_44",
+            "inputs": [
+                "n_43",
+                "n_30",
+                "n_35"
+            ]
+        },
+        {
+            "type": "AOI21X1",
+            "output": "n_42",
+            "inputs": [
+                "n_41",
+                "n_37",
+                "n_40"
+            ]
+        },
+        {
+            "type": "CLKXOR2X1",
+            "output": "n_39",
+            "inputs": [
+                "n_38",
+                "n_37"
+            ]
+        },
+        {
+            "type": "OAI21X1",
+            "output": "n_49",
+            "inputs": [
+                "n_15",
+                "n_33",
+                "n_14"
+            ]
+        },
+        {
+            "type": "CLKXOR2X1",
+            "output": "n_36",
+            "inputs": [
+                "n_32",
+                "n_28"
+            ]
+        },
+        {
+            "type": "AOI222X1",
+            "output": "n_35",
+            "inputs": [
+                "n_47",
+                "n_17",
+                "opcode[1]",
+                "n_5",
+                "n_34",
+                "n_27"
+            ]
+        },
+        {
+            "type": "DFFRX1",
+            "output": "result[0]",
+            "inputs": [
+                "n_58",
+                "clk",
+                "n_31"
+            ]
+        },
+        {
+            "type": "DFFRX1",
+            "output": "UNCONNECTED4",
+            "inputs": [
+                "n_58",
+                "clk",
+                "n_31"
+            ]
+        },
+        {
+            "type": "INVX1",
+            "output": "n_37",
+            "inputs": [
+                "n_24"
+            ]
+        },
+        {
+            "type": "INVX1",
+            "output": "n_33",
+            "inputs": [
+                "n_32"
+            ]
+        },
+        {
+            "type": "OAI221X1",
+            "output": "n_31",
+            "inputs": [
+                "opcode[1]",
+                "n_19",
+                "n_1",
+                "n_26",
+                "n_12"
+            ]
+        },
+        {
+            "type": "CLKXOR2X1",
+            "output": "n_30",
+            "inputs": [
+                "n_20",
+                "n_25"
+            ]
+        },
+        {
+            "type": "CLKXOR2X1",
+            "output": "n_29",
+            "inputs": [
+                "n_28",
+                "n_22"
+            ]
+        },
+        {
+            "type": "CLKXOR2X1",
+            "output": "n_27",
+            "inputs": [
+                "n_26",
+                "n_25"
+            ]
+        },
+        {
+            "type": "AOI21X1",
+            "output": "n_24",
+            "inputs": [
+                "n_23",
+                "n_22",
+                "n_21"
+            ]
+        },
+        {
+            "type": "OAI22X1",
+            "output": "n_32",
+            "inputs": [
+                "n_9",
+                "n_20",
+                "B[1]",
+                "n_8"
+            ]
+        },
+        {
+            "type": "ADDHX1",
+            "output": "n_20",
+            "inputs": [
+                "B[0]",
+                "n_0"
+            ]
+        },
+        {
+            "type": "ADDHX1",
+            "output": "n_19",
+            "inputs": [
+                "B[0]",
+                "n_0"
+            ]
+        },
+        {
+            "type": "OAI21X1",
+            "output": "n_22",
+            "inputs": [
+                "n_26",
+                "n_2",
+                "n_18"
+            ]
+        },
+        {
+            "type": "NAND2X1",
+            "output": "n_25",
+            "inputs": [
+                "n_18",
+                "n_17"
+            ]
+        },
+        {
+            "type": "NOR2X1",
+            "output": "n_38",
+            "inputs": [
+                "n_10",
+                "n_16"
+            ]
+        },
+        {
+            "type": "NOR2X1",
+            "output": "n_28",
+            "inputs": [
+                "n_15",
+                "n_13"
+            ]
+        },
+        {
+            "type": "INVX1",
+            "output": "n_14",
+            "inputs": [
+                "n_13"
+            ]
+        },
+        {
+            "type": "OAI21X1",
+            "output": "n_12",
+            "inputs": [
+                "B[0]",
+                "A[0]",
+                "n_47"
+            ]
+        },
+        {
+            "type": "INVX1",
+            "output": "n_11",
+            "inputs": [
+                "n_10"
+            ]
+        },
+        {
+            "type": "CLKINVX2",
+            "output": "n_46",
+            "inputs": [
+                "n_43"
+            ]
+        },
+        {
+            "type": "AND2X1",
+            "output": "n_9",
+            "inputs": [
+                "n_8",
+                "B[1]"
+            ]
+        },
+        {
+            "type": "INVX1",
+            "output": "n_52",
+            "inputs": [
+                "n_34"
+            ]
+        },
+        {
+            "type": "NOR2X1",
+            "output": "n_16",
+            "inputs": [
+                "B[3]",
+                "n_4"
+            ]
+        },
+        {
+            "type": "NOR2X1",
+            "output": "n_13",
+            "inputs": [
+                "B[2]",
+                "n_7"
+            ]
+        },
+        {
+            "type": "NAND2X1",
+            "output": "n_23",
+            "inputs": [
+                "n_7",
+                "n_6"
+            ]
+        },
+        {
+            "type": "NOR2X1",
+            "output": "n_15",
+            "inputs": [
+                "A[2]",
+                "n_6"
+            ]
+        },
+        {
+            "type": "INVX1",
+            "output": "n_5",
+            "inputs": [
+                "n_18"
+            ]
+        },
+        {
+            "type": "NAND2X1",
+            "output": "n_41",
+            "inputs": [
+                "n_4",
+                "n_3"
+            ]
+        },
+        {
+            "type": "NOR2X1",
+            "output": "n_40",
+            "inputs": [
+                "n_4",
+                "n_3"
+            ]
+        },
+        {
+            "type": "INVX1",
+            "output": "n_17",
+            "inputs": [
+                "n_2"
+            ]
+        },
+        {
+            "type": "NOR2X1",
+            "output": "n_10",
+            "inputs": [
+                "A[3]",
+                "n_3"
+            ]
+        },
+        {
+            "type": "NAND2X1",
+            "output": "n_43",
+            "inputs": [
+                "opcode[0]",
+                "n_1"
+            ]
+        },
+        {
+            "type": "NAND2X1",
+            "output": "n_26",
+            "inputs": [
+                "B[0]",
+                "A[0]"
+            ]
+        },
+        {
+            "type": "NOR2X1",
+            "output": "n_34",
+            "inputs": [
+                "opcode[0]",
+                "opcode[1]"
+            ]
+        },
+        {
+            "type": "AND2X1",
+            "output": "n_47",
+            "inputs": [
+                "opcode[1]",
+                "opcode[0]"
+            ]
+        },
+        {
+            "type": "NOR2X1",
+            "output": "n_2",
+            "inputs": [
+                "B[1]",
+                "A[1]"
+            ]
+        },
+        {
+            "type": "AND2X1",
+            "output": "n_21",
+            "inputs": [
+                "A[2]",
+                "B[2]"
+            ]
+        },
+        {
+            "type": "NAND2X1",
+            "output": "n_18",
+            "inputs": [
+                "B[1]",
+                "A[1]"
+            ]
+        },
+        {
+            "type": "CLKINVX2",
+            "output": "n_0",
+            "inputs": [
+                "A[0]"
+            ]
+        },
+        {
+            "type": "CLKINVX2",
+            "output": "n_7",
+            "inputs": [
+                "A[2]"
+            ]
+        },
+        {
+            "type": "CLKINVX2",
+            "output": "n_8",
+            "inputs": [
+                "A[1]"
+            ]
+        },
+        {
+            "type": "INVX2",
+            "output": "n_3",
+            "inputs": [
+                "B[3]"
+            ]
+        },
+        {
+            "type": "CLKINVX2",
+            "output": "n_1",
+            "inputs": [
+                "opcode[1]"
+            ]
+        },
+        {
+            "type": "INVX2",
+            "output": "n_6",
+            "inputs": [
+                "B[2]"
+            ]
+        },
+        {
+            "type": "INVX2",
+            "output": "n_4",
+            "inputs": [
+                "A[3]"
+            ]
+        },
+        {
+            "type": "INVX1",
+            "output": "n_58",
+            "inputs": [
+                "reset"
+            ]
+        }
+    ]
+}
