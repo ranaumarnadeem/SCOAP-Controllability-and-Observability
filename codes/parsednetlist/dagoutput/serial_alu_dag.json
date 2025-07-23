@@ -688,5 +688,27 @@
     "opcode[0]": "opcode[0]",
     "A[1]": "A[1]",
     "reset": "reset"
-  }
+  },
+  "primary_inputs": [
+    "clk",
+    "reset",
+    "A[3]",
+    "A[2]",
+    "A[1]",
+    "A[0]",
+    "B[3]",
+    "B[2]",
+    "B[1]",
+    "B[0]",
+    "opcode[1]",
+    "opcode[0]"
+  ],
+  "primary_outputs": [
+    "result[3]",
+    "result[2]",
+    "result[1]",
+    "result[0]",
+    "zero",
+    "carry"
+  ]
 }

@@ -5,12 +5,27 @@ import sys
 
 def parse_netlist_txt(txt_path):
     gates = []
+    primary_inputs = []
+    primary_outputs = []
+
     with open(txt_path, 'r') as f:
         for line in f:
             line = line.strip()
-            if not line or line.startswith('#') or line.startswith('INPUT') or line.startswith('OUTPUT'):
+
+            if not line or line.startswith('#'):
                 continue
 
+            # Capture primary inputs
+            if line.startswith('INPUT'):
+                primary_inputs.extend(line.replace('INPUT', '').strip().split())
+                continue
+
+            # Capture primary outputs
+            if line.startswith('OUTPUT'):
+                primary_outputs.extend(line.replace('OUTPUT', '').strip().split())
+                continue
+
+            # Match gates
             match = re.match(r'(\w+)\s+out\((\S+)\)\s+in\((.*?)\)', line)
             if match:
                 gate_type = match.group(1)
@@ -22,7 +37,12 @@ def parse_netlist_txt(txt_path):
                     "output": output,
                     "inputs": inputs
                 })
-    return {"gates": gates}
+
+    return {
+        "primary_inputs": primary_inputs,
+        "primary_outputs": primary_outputs,
+        "gates": gates
+    }
 
 def main():
     if len(sys.argv) != 2:

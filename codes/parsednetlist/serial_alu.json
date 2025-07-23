@@ -1,4 +1,16 @@
 {
+    "primary_inputs": [
+        "clk",
+        "reset",
+        "A[3:0]",
+        "B[3:0]",
+        "opcode[1:0]"
+    ],
+    "primary_outputs": [
+        "result[3:0]",
+        "zero",
+        "carry"
+    ],
     "gates": [
         {
             "type": "DFFRX1",
