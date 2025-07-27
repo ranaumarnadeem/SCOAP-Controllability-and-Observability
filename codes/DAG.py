@@ -8,7 +8,6 @@ dag.py
 Reads parsed netlist JSON from codes/parsednetlist/<design>.json
 Writes DAG JSON to codes/dagoutput/<design>_dag.json
 Usage:
-  cd codes
   python3 dag.py <design>.json
 """
 

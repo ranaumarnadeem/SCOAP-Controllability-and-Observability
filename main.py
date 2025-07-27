@@ -4,7 +4,7 @@ import sys
 import subprocess
 import os
 
-# Entry-point CLI for parsing, scoap, dag, graph, reconverge
+
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 CODES_DIR  = os.path.join(SCRIPT_DIR, 'codes')
 

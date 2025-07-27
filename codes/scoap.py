@@ -6,7 +6,7 @@ import math
 import json
 from collections import defaultdict
 
-# Directories (relative to this file)
+
 CURRENT_DIR    = os.path.dirname(os.path.abspath(__file__))
 PARSED_DIR     = os.path.join(CURRENT_DIR, 'parsednetlist')
 SCOAP_OUT_DIR  = os.path.join(CURRENT_DIR, 'scoapout')

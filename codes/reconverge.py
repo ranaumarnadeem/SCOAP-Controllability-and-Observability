@@ -1,5 +1,4 @@
-#!/usr/bin/env python3
-# reconverge.py
+
 # -------------------------------
 # Reads DAG JSON from codes/dagoutput/<design>_dag.json
 # Writes reconvergence JSON to codes/reconvergence/<design>_reconv.json
