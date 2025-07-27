@@ -1,0 +1,1680 @@
+[
+  {
+    "site": "n_15",
+    "branch1": "in[7]",
+    "branch2": "en",
+    "path1": [
+      "in[7]",
+      "n_15"
+    ],
+    "path2": [
+      "en",
+      "n_15"
+    ]
+  },
+  {
+    "site": "n_15",
+    "branch1": "in[7]",
+    "branch2": "in[6]",
+    "path1": [
+      "in[7]",
+      "n_15"
+    ],
+    "path2": [
+      "in[6]",
+      "n_14",
+      "n_15"
+    ]
+  },
+  {
+    "site": "n_15",
+    "branch1": "in[7]",
+    "branch2": "in[5]",
+    "path1": [
+      "in[7]",
+      "n_15"
+    ],
+    "path2": [
+      "in[5]",
+      "n_11",
+      "n_14",
+      "n_15"
+    ]
+  },
+  {
+    "site": "n_15",
+    "branch1": "in[7]",
+    "branch2": "in[1]",
+    "path1": [
+      "in[7]",
+      "n_15"
+    ],
+    "path2": [
+      "in[1]",
+      "n_5",
+      "n_9",
+      "n_11",
+      "n_14",
+      "n_15"
+    ]
+  },
+  {
+    "site": "n_15",
+    "branch1": "in[7]",
+    "branch2": "in[4]",
+    "path1": [
+      "in[7]",
+      "n_15"
+    ],
+    "path2": [
+      "in[4]",
+      "n_9",
+      "n_11",
+      "n_14",
+      "n_15"
+    ]
+  },
+  {
+    "site": "n_15",
+    "branch1": "in[7]",
+    "branch2": "in[3]",
+    "path1": [
+      "in[7]",
+      "n_15"
+    ],
+    "path2": [
+      "in[3]",
+      "n_5",
+      "n_9",
+      "n_11",
+      "n_14",
+      "n_15"
+    ]
+  },
+  {
+    "site": "n_15",
+    "branch1": "in[7]",
+    "branch2": "in[2]",
+    "path1": [
+      "in[7]",
+      "n_15"
+    ],
+    "path2": [
+      "in[2]",
+      "n_1",
+      "n_5",
+      "n_9",
+      "n_11",
+      "n_14",
+      "n_15"
+    ]
+  },
+  {
+    "site": "n_15",
+    "branch1": "en",
+    "branch2": "in[6]",
+    "path1": [
+      "en",
+      "n_15"
+    ],
+    "path2": [
+      "in[6]",
+      "n_14",
+      "n_15"
+    ]
+  },
+  {
+    "site": "n_15",
+    "branch1": "en",
+    "branch2": "in[5]",
+    "path1": [
+      "en",
+      "n_15"
+    ],
+    "path2": [
+      "in[5]",
+      "n_11",
+      "n_14",
+      "n_15"
+    ]
+  },
+  {
+    "site": "n_15",
+    "branch1": "en",
+    "branch2": "in[1]",
+    "path1": [
+      "en",
+      "n_15"
+    ],
+    "path2": [
+      "in[1]",
+      "n_5",
+      "n_9",
+      "n_11",
+      "n_14",
+      "n_15"
+    ]
+  },
+  {
+    "site": "n_15",
+    "branch1": "en",
+    "branch2": "in[4]",
+    "path1": [
+      "en",
+      "n_15"
+    ],
+    "path2": [
+      "in[4]",
+      "n_9",
+      "n_11",
+      "n_14",
+      "n_15"
+    ]
+  },
+  {
+    "site": "n_15",
+    "branch1": "en",
+    "branch2": "in[3]",
+    "path1": [
+      "en",
+      "n_15"
+    ],
+    "path2": [
+      "in[3]",
+      "n_5",
+      "n_9",
+      "n_11",
+      "n_14",
+      "n_15"
+    ]
+  },
+  {
+    "site": "n_15",
+    "branch1": "en",
+    "branch2": "in[2]",
+    "path1": [
+      "en",
+      "n_15"
+    ],
+    "path2": [
+      "in[2]",
+      "n_1",
+      "n_5",
+      "n_9",
+      "n_11",
+      "n_14",
+      "n_15"
+    ]
+  },
+  {
+    "site": "n_14",
+    "branch1": "in[6]",
+    "branch2": "in[5]",
+    "path1": [
+      "in[6]",
+      "n_14"
+    ],
+    "path2": [
+      "in[5]",
+      "n_11",
+      "n_14"
+    ]
+  },
+  {
+    "site": "n_14",
+    "branch1": "in[6]",
+    "branch2": "in[1]",
+    "path1": [
+      "in[6]",
+      "n_14"
+    ],
+    "path2": [
+      "in[1]",
+      "n_5",
+      "n_9",
+      "n_11",
+      "n_14"
+    ]
+  },
+  {
+    "site": "n_14",
+    "branch1": "in[6]",
+    "branch2": "in[4]",
+    "path1": [
+      "in[6]",
+      "n_14"
+    ],
+    "path2": [
+      "in[4]",
+      "n_9",
+      "n_11",
+      "n_14"
+    ]
+  },
+  {
+    "site": "n_14",
+    "branch1": "in[6]",
+    "branch2": "in[3]",
+    "path1": [
+      "in[6]",
+      "n_14"
+    ],
+    "path2": [
+      "in[3]",
+      "n_5",
+      "n_9",
+      "n_11",
+      "n_14"
+    ]
+  },
+  {
+    "site": "n_14",
+    "branch1": "in[6]",
+    "branch2": "in[2]",
+    "path1": [
+      "in[6]",
+      "n_14"
+    ],
+    "path2": [
+      "in[2]",
+      "n_1",
+      "n_5",
+      "n_9",
+      "n_11",
+      "n_14"
+    ]
+  },
+  {
+    "site": "n_11",
+    "branch1": "in[5]",
+    "branch2": "in[1]",
+    "path1": [
+      "in[5]",
+      "n_11"
+    ],
+    "path2": [
+      "in[1]",
+      "n_5",
+      "n_9",
+      "n_11"
+    ]
+  },
+  {
+    "site": "n_11",
+    "branch1": "in[5]",
+    "branch2": "in[4]",
+    "path1": [
+      "in[5]",
+      "n_11"
+    ],
+    "path2": [
+      "in[4]",
+      "n_9",
+      "n_11"
+    ]
+  },
+  {
+    "site": "n_11",
+    "branch1": "in[5]",
+    "branch2": "in[3]",
+    "path1": [
+      "in[5]",
+      "n_11"
+    ],
+    "path2": [
+      "in[3]",
+      "n_5",
+      "n_9",
+      "n_11"
+    ]
+  },
+  {
+    "site": "n_11",
+    "branch1": "in[5]",
+    "branch2": "in[2]",
+    "path1": [
+      "in[5]",
+      "n_11"
+    ],
+    "path2": [
+      "in[2]",
+      "n_1",
+      "n_5",
+      "n_9",
+      "n_11"
+    ]
+  },
+  {
+    "site": "n_2",
+    "branch1": "in[7]",
+    "branch2": "in[6]",
+    "path1": [
+      "in[7]",
+      "n_2"
+    ],
+    "path2": [
+      "in[6]",
+      "n_2"
+    ]
+  },
+  {
+    "site": "out[1]",
+    "branch1": "in[7]",
+    "branch2": "en",
+    "path1": [
+      "in[7]",
+      "n_2",
+      "out[1]"
+    ],
+    "path2": [
+      "en",
+      "n_0",
+      "out[1]"
+    ]
+  },
+  {
+    "site": "out[1]",
+    "branch1": "in[7]",
+    "branch2": "in[5]",
+    "path1": [
+      "in[7]",
+      "n_2",
+      "out[1]"
+    ],
+    "path2": [
+      "in[5]",
+      "n_6",
+      "out[1]"
+    ]
+  },
+  {
+    "site": "out[1]",
+    "branch1": "in[7]",
+    "branch2": "in[4]",
+    "path1": [
+      "in[7]",
+      "n_2",
+      "out[1]"
+    ],
+    "path2": [
+      "in[4]",
+      "n_6",
+      "out[1]"
+    ]
+  },
+  {
+    "site": "out[1]",
+    "branch1": "in[7]",
+    "branch2": "n_3",
+    "path1": [
+      "in[7]",
+      "n_2",
+      "out[1]"
+    ],
+    "path2": [
+      "n_3",
+      "n_6",
+      "out[1]"
+    ]
+  },
+  {
+    "site": "out[1]",
+    "branch1": "in[7]",
+    "branch2": "in[3]",
+    "path1": [
+      "in[7]",
+      "n_2",
+      "out[1]"
+    ],
+    "path2": [
+      "in[3]",
+      "n_3",
+      "n_6",
+      "out[1]"
+    ]
+  },
+  {
+    "site": "out[1]",
+    "branch1": "in[7]",
+    "branch2": "in[2]",
+    "path1": [
+      "in[7]",
+      "n_2",
+      "out[1]"
+    ],
+    "path2": [
+      "in[2]",
+      "n_3",
+      "n_6",
+      "out[1]"
+    ]
+  },
+  {
+    "site": "out[1]",
+    "branch1": "en",
+    "branch2": "in[6]",
+    "path1": [
+      "en",
+      "n_0",
+      "out[1]"
+    ],
+    "path2": [
+      "in[6]",
+      "n_2",
+      "out[1]"
+    ]
+  },
+  {
+    "site": "out[1]",
+    "branch1": "en",
+    "branch2": "in[5]",
+    "path1": [
+      "en",
+      "n_0",
+      "out[1]"
+    ],
+    "path2": [
+      "in[5]",
+      "n_6",
+      "out[1]"
+    ]
+  },
+  {
+    "site": "out[1]",
+    "branch1": "en",
+    "branch2": "in[4]",
+    "path1": [
+      "en",
+      "n_0",
+      "out[1]"
+    ],
+    "path2": [
+      "in[4]",
+      "n_6",
+      "out[1]"
+    ]
+  },
+  {
+    "site": "out[1]",
+    "branch1": "en",
+    "branch2": "n_3",
+    "path1": [
+      "en",
+      "n_0",
+      "out[1]"
+    ],
+    "path2": [
+      "n_3",
+      "n_6",
+      "out[1]"
+    ]
+  },
+  {
+    "site": "out[1]",
+    "branch1": "en",
+    "branch2": "in[3]",
+    "path1": [
+      "en",
+      "n_0",
+      "out[1]"
+    ],
+    "path2": [
+      "in[3]",
+      "n_3",
+      "n_6",
+      "out[1]"
+    ]
+  },
+  {
+    "site": "out[1]",
+    "branch1": "en",
+    "branch2": "in[2]",
+    "path1": [
+      "en",
+      "n_0",
+      "out[1]"
+    ],
+    "path2": [
+      "in[2]",
+      "n_3",
+      "n_6",
+      "out[1]"
+    ]
+  },
+  {
+    "site": "out[1]",
+    "branch1": "in[6]",
+    "branch2": "in[5]",
+    "path1": [
+      "in[6]",
+      "n_2",
+      "out[1]"
+    ],
+    "path2": [
+      "in[5]",
+      "n_6",
+      "out[1]"
+    ]
+  },
+  {
+    "site": "out[1]",
+    "branch1": "in[6]",
+    "branch2": "in[4]",
+    "path1": [
+      "in[6]",
+      "n_2",
+      "out[1]"
+    ],
+    "path2": [
+      "in[4]",
+      "n_6",
+      "out[1]"
+    ]
+  },
+  {
+    "site": "out[1]",
+    "branch1": "in[6]",
+    "branch2": "n_3",
+    "path1": [
+      "in[6]",
+      "n_2",
+      "out[1]"
+    ],
+    "path2": [
+      "n_3",
+      "n_6",
+      "out[1]"
+    ]
+  },
+  {
+    "site": "out[1]",
+    "branch1": "in[6]",
+    "branch2": "in[3]",
+    "path1": [
+      "in[6]",
+      "n_2",
+      "out[1]"
+    ],
+    "path2": [
+      "in[3]",
+      "n_3",
+      "n_6",
+      "out[1]"
+    ]
+  },
+  {
+    "site": "out[1]",
+    "branch1": "in[6]",
+    "branch2": "in[2]",
+    "path1": [
+      "in[6]",
+      "n_2",
+      "out[1]"
+    ],
+    "path2": [
+      "in[2]",
+      "n_3",
+      "n_6",
+      "out[1]"
+    ]
+  },
+  {
+    "site": "n_6",
+    "branch1": "in[5]",
+    "branch2": "in[4]",
+    "path1": [
+      "in[5]",
+      "n_6"
+    ],
+    "path2": [
+      "in[4]",
+      "n_6"
+    ]
+  },
+  {
+    "site": "n_6",
+    "branch1": "in[5]",
+    "branch2": "n_3",
+    "path1": [
+      "in[5]",
+      "n_6"
+    ],
+    "path2": [
+      "n_3",
+      "n_6"
+    ]
+  },
+  {
+    "site": "n_6",
+    "branch1": "in[5]",
+    "branch2": "in[3]",
+    "path1": [
+      "in[5]",
+      "n_6"
+    ],
+    "path2": [
+      "in[3]",
+      "n_3",
+      "n_6"
+    ]
+  },
+  {
+    "site": "n_6",
+    "branch1": "in[5]",
+    "branch2": "in[2]",
+    "path1": [
+      "in[5]",
+      "n_6"
+    ],
+    "path2": [
+      "in[2]",
+      "n_3",
+      "n_6"
+    ]
+  },
+  {
+    "site": "n_6",
+    "branch1": "in[4]",
+    "branch2": "n_3",
+    "path1": [
+      "in[4]",
+      "n_6"
+    ],
+    "path2": [
+      "n_3",
+      "n_6"
+    ]
+  },
+  {
+    "site": "n_6",
+    "branch1": "in[4]",
+    "branch2": "in[3]",
+    "path1": [
+      "in[4]",
+      "n_6"
+    ],
+    "path2": [
+      "in[3]",
+      "n_3",
+      "n_6"
+    ]
+  },
+  {
+    "site": "n_6",
+    "branch1": "in[4]",
+    "branch2": "in[2]",
+    "path1": [
+      "in[4]",
+      "n_6"
+    ],
+    "path2": [
+      "in[2]",
+      "n_3",
+      "n_6"
+    ]
+  },
+  {
+    "site": "n_6",
+    "branch1": "n_3",
+    "branch2": "in[3]",
+    "path1": [
+      "n_3",
+      "n_6"
+    ],
+    "path2": [
+      "in[3]",
+      "n_3",
+      "n_6"
+    ]
+  },
+  {
+    "site": "n_6",
+    "branch1": "n_3",
+    "branch2": "in[2]",
+    "path1": [
+      "n_3",
+      "n_6"
+    ],
+    "path2": [
+      "in[2]",
+      "n_3",
+      "n_6"
+    ]
+  },
+  {
+    "site": "valid",
+    "branch1": "in[7]",
+    "branch2": "en",
+    "path1": [
+      "in[7]",
+      "n_7",
+      "n_10",
+      "valid"
+    ],
+    "path2": [
+      "en",
+      "valid"
+    ]
+  },
+  {
+    "site": "valid",
+    "branch1": "en",
+    "branch2": "in[6]",
+    "path1": [
+      "en",
+      "valid"
+    ],
+    "path2": [
+      "in[6]",
+      "n_7",
+      "n_10",
+      "valid"
+    ]
+  },
+  {
+    "site": "valid",
+    "branch1": "en",
+    "branch2": "in[5]",
+    "path1": [
+      "en",
+      "valid"
+    ],
+    "path2": [
+      "in[5]",
+      "n_7",
+      "n_10",
+      "valid"
+    ]
+  },
+  {
+    "site": "valid",
+    "branch1": "en",
+    "branch2": "in[1]",
+    "path1": [
+      "en",
+      "valid"
+    ],
+    "path2": [
+      "in[1]",
+      "n_10",
+      "valid"
+    ]
+  },
+  {
+    "site": "valid",
+    "branch1": "en",
+    "branch2": "n_7",
+    "path1": [
+      "en",
+      "valid"
+    ],
+    "path2": [
+      "n_7",
+      "n_10",
+      "valid"
+    ]
+  },
+  {
+    "site": "valid",
+    "branch1": "en",
+    "branch2": "in[4]",
+    "path1": [
+      "en",
+      "valid"
+    ],
+    "path2": [
+      "in[4]",
+      "n_7",
+      "n_10",
+      "valid"
+    ]
+  },
+  {
+    "site": "valid",
+    "branch1": "en",
+    "branch2": "n_3",
+    "path1": [
+      "en",
+      "valid"
+    ],
+    "path2": [
+      "n_3",
+      "n_4",
+      "n_10",
+      "valid"
+    ]
+  },
+  {
+    "site": "valid",
+    "branch1": "en",
+    "branch2": "in[3]",
+    "path1": [
+      "en",
+      "valid"
+    ],
+    "path2": [
+      "in[3]",
+      "n_3",
+      "n_4",
+      "n_10",
+      "valid"
+    ]
+  },
+  {
+    "site": "valid",
+    "branch1": "en",
+    "branch2": "in[2]",
+    "path1": [
+      "en",
+      "valid"
+    ],
+    "path2": [
+      "in[2]",
+      "n_3",
+      "n_4",
+      "n_10",
+      "valid"
+    ]
+  },
+  {
+    "site": "n_10",
+    "branch1": "in[7]",
+    "branch2": "in[1]",
+    "path1": [
+      "in[7]",
+      "n_7",
+      "n_10"
+    ],
+    "path2": [
+      "in[1]",
+      "n_10"
+    ]
+  },
+  {
+    "site": "n_10",
+    "branch1": "in[7]",
+    "branch2": "n_7",
+    "path1": [
+      "in[7]",
+      "n_7",
+      "n_10"
+    ],
+    "path2": [
+      "n_7",
+      "n_10"
+    ]
+  },
+  {
+    "site": "n_10",
+    "branch1": "in[7]",
+    "branch2": "n_3",
+    "path1": [
+      "in[7]",
+      "n_7",
+      "n_10"
+    ],
+    "path2": [
+      "n_3",
+      "n_4",
+      "n_10"
+    ]
+  },
+  {
+    "site": "n_10",
+    "branch1": "in[7]",
+    "branch2": "in[3]",
+    "path1": [
+      "in[7]",
+      "n_7",
+      "n_10"
+    ],
+    "path2": [
+      "in[3]",
+      "n_3",
+      "n_4",
+      "n_10"
+    ]
+  },
+  {
+    "site": "n_10",
+    "branch1": "in[7]",
+    "branch2": "in[2]",
+    "path1": [
+      "in[7]",
+      "n_7",
+      "n_10"
+    ],
+    "path2": [
+      "in[2]",
+      "n_3",
+      "n_4",
+      "n_10"
+    ]
+  },
+  {
+    "site": "n_10",
+    "branch1": "in[6]",
+    "branch2": "in[1]",
+    "path1": [
+      "in[6]",
+      "n_7",
+      "n_10"
+    ],
+    "path2": [
+      "in[1]",
+      "n_10"
+    ]
+  },
+  {
+    "site": "n_10",
+    "branch1": "in[6]",
+    "branch2": "n_7",
+    "path1": [
+      "in[6]",
+      "n_7",
+      "n_10"
+    ],
+    "path2": [
+      "n_7",
+      "n_10"
+    ]
+  },
+  {
+    "site": "n_10",
+    "branch1": "in[6]",
+    "branch2": "n_3",
+    "path1": [
+      "in[6]",
+      "n_7",
+      "n_10"
+    ],
+    "path2": [
+      "n_3",
+      "n_4",
+      "n_10"
+    ]
+  },
+  {
+    "site": "n_10",
+    "branch1": "in[6]",
+    "branch2": "in[3]",
+    "path1": [
+      "in[6]",
+      "n_7",
+      "n_10"
+    ],
+    "path2": [
+      "in[3]",
+      "n_3",
+      "n_4",
+      "n_10"
+    ]
+  },
+  {
+    "site": "n_10",
+    "branch1": "in[6]",
+    "branch2": "in[2]",
+    "path1": [
+      "in[6]",
+      "n_7",
+      "n_10"
+    ],
+    "path2": [
+      "in[2]",
+      "n_3",
+      "n_4",
+      "n_10"
+    ]
+  },
+  {
+    "site": "n_10",
+    "branch1": "in[5]",
+    "branch2": "in[1]",
+    "path1": [
+      "in[5]",
+      "n_7",
+      "n_10"
+    ],
+    "path2": [
+      "in[1]",
+      "n_10"
+    ]
+  },
+  {
+    "site": "n_10",
+    "branch1": "in[5]",
+    "branch2": "n_7",
+    "path1": [
+      "in[5]",
+      "n_7",
+      "n_10"
+    ],
+    "path2": [
+      "n_7",
+      "n_10"
+    ]
+  },
+  {
+    "site": "n_10",
+    "branch1": "in[5]",
+    "branch2": "n_3",
+    "path1": [
+      "in[5]",
+      "n_7",
+      "n_10"
+    ],
+    "path2": [
+      "n_3",
+      "n_4",
+      "n_10"
+    ]
+  },
+  {
+    "site": "n_10",
+    "branch1": "in[5]",
+    "branch2": "in[3]",
+    "path1": [
+      "in[5]",
+      "n_7",
+      "n_10"
+    ],
+    "path2": [
+      "in[3]",
+      "n_3",
+      "n_4",
+      "n_10"
+    ]
+  },
+  {
+    "site": "n_10",
+    "branch1": "in[5]",
+    "branch2": "in[2]",
+    "path1": [
+      "in[5]",
+      "n_7",
+      "n_10"
+    ],
+    "path2": [
+      "in[2]",
+      "n_3",
+      "n_4",
+      "n_10"
+    ]
+  },
+  {
+    "site": "n_10",
+    "branch1": "in[1]",
+    "branch2": "n_7",
+    "path1": [
+      "in[1]",
+      "n_10"
+    ],
+    "path2": [
+      "n_7",
+      "n_10"
+    ]
+  },
+  {
+    "site": "n_10",
+    "branch1": "in[1]",
+    "branch2": "in[4]",
+    "path1": [
+      "in[1]",
+      "n_10"
+    ],
+    "path2": [
+      "in[4]",
+      "n_7",
+      "n_10"
+    ]
+  },
+  {
+    "site": "n_10",
+    "branch1": "in[1]",
+    "branch2": "n_3",
+    "path1": [
+      "in[1]",
+      "n_10"
+    ],
+    "path2": [
+      "n_3",
+      "n_4",
+      "n_10"
+    ]
+  },
+  {
+    "site": "n_10",
+    "branch1": "in[1]",
+    "branch2": "in[3]",
+    "path1": [
+      "in[1]",
+      "n_10"
+    ],
+    "path2": [
+      "in[3]",
+      "n_3",
+      "n_4",
+      "n_10"
+    ]
+  },
+  {
+    "site": "n_10",
+    "branch1": "in[1]",
+    "branch2": "in[2]",
+    "path1": [
+      "in[1]",
+      "n_10"
+    ],
+    "path2": [
+      "in[2]",
+      "n_3",
+      "n_4",
+      "n_10"
+    ]
+  },
+  {
+    "site": "n_10",
+    "branch1": "n_7",
+    "branch2": "in[4]",
+    "path1": [
+      "n_7",
+      "n_10"
+    ],
+    "path2": [
+      "in[4]",
+      "n_7",
+      "n_10"
+    ]
+  },
+  {
+    "site": "n_10",
+    "branch1": "n_7",
+    "branch2": "n_3",
+    "path1": [
+      "n_7",
+      "n_10"
+    ],
+    "path2": [
+      "n_3",
+      "n_4",
+      "n_10"
+    ]
+  },
+  {
+    "site": "n_10",
+    "branch1": "n_7",
+    "branch2": "in[3]",
+    "path1": [
+      "n_7",
+      "n_10"
+    ],
+    "path2": [
+      "in[3]",
+      "n_3",
+      "n_4",
+      "n_10"
+    ]
+  },
+  {
+    "site": "n_10",
+    "branch1": "n_7",
+    "branch2": "in[2]",
+    "path1": [
+      "n_7",
+      "n_10"
+    ],
+    "path2": [
+      "in[2]",
+      "n_3",
+      "n_4",
+      "n_10"
+    ]
+  },
+  {
+    "site": "n_10",
+    "branch1": "in[4]",
+    "branch2": "n_3",
+    "path1": [
+      "in[4]",
+      "n_7",
+      "n_10"
+    ],
+    "path2": [
+      "n_3",
+      "n_4",
+      "n_10"
+    ]
+  },
+  {
+    "site": "n_10",
+    "branch1": "in[4]",
+    "branch2": "in[3]",
+    "path1": [
+      "in[4]",
+      "n_7",
+      "n_10"
+    ],
+    "path2": [
+      "in[3]",
+      "n_3",
+      "n_4",
+      "n_10"
+    ]
+  },
+  {
+    "site": "n_10",
+    "branch1": "in[4]",
+    "branch2": "in[2]",
+    "path1": [
+      "in[4]",
+      "n_7",
+      "n_10"
+    ],
+    "path2": [
+      "in[2]",
+      "n_3",
+      "n_4",
+      "n_10"
+    ]
+  },
+  {
+    "site": "n_9",
+    "branch1": "in[1]",
+    "branch2": "in[4]",
+    "path1": [
+      "in[1]",
+      "n_5",
+      "n_9"
+    ],
+    "path2": [
+      "in[4]",
+      "n_9"
+    ]
+  },
+  {
+    "site": "n_9",
+    "branch1": "in[4]",
+    "branch2": "in[3]",
+    "path1": [
+      "in[4]",
+      "n_9"
+    ],
+    "path2": [
+      "in[3]",
+      "n_5",
+      "n_9"
+    ]
+  },
+  {
+    "site": "n_9",
+    "branch1": "in[4]",
+    "branch2": "in[2]",
+    "path1": [
+      "in[4]",
+      "n_9"
+    ],
+    "path2": [
+      "in[2]",
+      "n_1",
+      "n_5",
+      "n_9"
+    ]
+  },
+  {
+    "site": "n_4",
+    "branch1": "n_3",
+    "branch2": "in[3]",
+    "path1": [
+      "n_3",
+      "n_4"
+    ],
+    "path2": [
+      "in[3]",
+      "n_3",
+      "n_4"
+    ]
+  },
+  {
+    "site": "n_4",
+    "branch1": "n_3",
+    "branch2": "in[2]",
+    "path1": [
+      "n_3",
+      "n_4"
+    ],
+    "path2": [
+      "in[2]",
+      "n_3",
+      "n_4"
+    ]
+  },
+  {
+    "site": "n_7",
+    "branch1": "in[7]",
+    "branch2": "in[6]",
+    "path1": [
+      "in[7]",
+      "n_7"
+    ],
+    "path2": [
+      "in[6]",
+      "n_7"
+    ]
+  },
+  {
+    "site": "n_7",
+    "branch1": "in[7]",
+    "branch2": "in[5]",
+    "path1": [
+      "in[7]",
+      "n_7"
+    ],
+    "path2": [
+      "in[5]",
+      "n_7"
+    ]
+  },
+  {
+    "site": "n_7",
+    "branch1": "in[7]",
+    "branch2": "n_7",
+    "path1": [
+      "in[7]",
+      "n_7"
+    ],
+    "path2": [
+      "n_7"
+    ]
+  },
+  {
+    "site": "n_7",
+    "branch1": "in[7]",
+    "branch2": "in[4]",
+    "path1": [
+      "in[7]",
+      "n_7"
+    ],
+    "path2": [
+      "in[4]",
+      "n_7"
+    ]
+  },
+  {
+    "site": "n_7",
+    "branch1": "in[6]",
+    "branch2": "in[5]",
+    "path1": [
+      "in[6]",
+      "n_7"
+    ],
+    "path2": [
+      "in[5]",
+      "n_7"
+    ]
+  },
+  {
+    "site": "n_7",
+    "branch1": "in[6]",
+    "branch2": "n_7",
+    "path1": [
+      "in[6]",
+      "n_7"
+    ],
+    "path2": [
+      "n_7"
+    ]
+  },
+  {
+    "site": "n_7",
+    "branch1": "in[6]",
+    "branch2": "in[4]",
+    "path1": [
+      "in[6]",
+      "n_7"
+    ],
+    "path2": [
+      "in[4]",
+      "n_7"
+    ]
+  },
+  {
+    "site": "n_7",
+    "branch1": "in[5]",
+    "branch2": "n_7",
+    "path1": [
+      "in[5]",
+      "n_7"
+    ],
+    "path2": [
+      "n_7"
+    ]
+  },
+  {
+    "site": "n_7",
+    "branch1": "in[5]",
+    "branch2": "in[4]",
+    "path1": [
+      "in[5]",
+      "n_7"
+    ],
+    "path2": [
+      "in[4]",
+      "n_7"
+    ]
+  },
+  {
+    "site": "n_7",
+    "branch1": "n_7",
+    "branch2": "in[4]",
+    "path1": [
+      "n_7"
+    ],
+    "path2": [
+      "in[4]",
+      "n_7"
+    ]
+  },
+  {
+    "site": "n_5",
+    "branch1": "in[1]",
+    "branch2": "in[3]",
+    "path1": [
+      "in[1]",
+      "n_5"
+    ],
+    "path2": [
+      "in[3]",
+      "n_5"
+    ]
+  },
+  {
+    "site": "n_5",
+    "branch1": "in[1]",
+    "branch2": "in[2]",
+    "path1": [
+      "in[1]",
+      "n_5"
+    ],
+    "path2": [
+      "in[2]",
+      "n_1",
+      "n_5"
+    ]
+  },
+  {
+    "site": "n_5",
+    "branch1": "in[3]",
+    "branch2": "in[2]",
+    "path1": [
+      "in[3]",
+      "n_5"
+    ],
+    "path2": [
+      "in[2]",
+      "n_1",
+      "n_5"
+    ]
+  },
+  {
+    "site": "out[2]",
+    "branch1": "in[7]",
+    "branch2": "en",
+    "path1": [
+      "in[7]",
+      "n_7",
+      "out[2]"
+    ],
+    "path2": [
+      "en",
+      "out[2]"
+    ]
+  },
+  {
+    "site": "out[2]",
+    "branch1": "in[7]",
+    "branch2": "n_7",
+    "path1": [
+      "in[7]",
+      "n_7",
+      "out[2]"
+    ],
+    "path2": [
+      "n_7",
+      "out[2]"
+    ]
+  },
+  {
+    "site": "out[2]",
+    "branch1": "en",
+    "branch2": "in[6]",
+    "path1": [
+      "en",
+      "out[2]"
+    ],
+    "path2": [
+      "in[6]",
+      "n_7",
+      "out[2]"
+    ]
+  },
+  {
+    "site": "out[2]",
+    "branch1": "en",
+    "branch2": "in[5]",
+    "path1": [
+      "en",
+      "out[2]"
+    ],
+    "path2": [
+      "in[5]",
+      "n_7",
+      "out[2]"
+    ]
+  },
+  {
+    "site": "out[2]",
+    "branch1": "en",
+    "branch2": "n_7",
+    "path1": [
+      "en",
+      "out[2]"
+    ],
+    "path2": [
+      "n_7",
+      "out[2]"
+    ]
+  },
+  {
+    "site": "out[2]",
+    "branch1": "en",
+    "branch2": "in[4]",
+    "path1": [
+      "en",
+      "out[2]"
+    ],
+    "path2": [
+      "in[4]",
+      "n_7",
+      "out[2]"
+    ]
+  },
+  {
+    "site": "out[2]",
+    "branch1": "in[6]",
+    "branch2": "n_7",
+    "path1": [
+      "in[6]",
+      "n_7",
+      "out[2]"
+    ],
+    "path2": [
+      "n_7",
+      "out[2]"
+    ]
+  },
+  {
+    "site": "out[2]",
+    "branch1": "in[5]",
+    "branch2": "n_7",
+    "path1": [
+      "in[5]",
+      "n_7",
+      "out[2]"
+    ],
+    "path2": [
+      "n_7",
+      "out[2]"
+    ]
+  },
+  {
+    "site": "out[2]",
+    "branch1": "n_7",
+    "branch2": "in[4]",
+    "path1": [
+      "n_7",
+      "out[2]"
+    ],
+    "path2": [
+      "in[4]",
+      "n_7",
+      "out[2]"
+    ]
+  },
+  {
+    "site": "n_3",
+    "branch1": "n_3",
+    "branch2": "in[3]",
+    "path1": [
+      "n_3"
+    ],
+    "path2": [
+      "in[3]",
+      "n_3"
+    ]
+  },
+  {
+    "site": "n_3",
+    "branch1": "n_3",
+    "branch2": "in[2]",
+    "path1": [
+      "n_3"
+    ],
+    "path2": [
+      "in[2]",
+      "n_3"
+    ]
+  },
+  {
+    "site": "n_3",
+    "branch1": "in[3]",
+    "branch2": "in[2]",
+    "path1": [
+      "in[3]",
+      "n_3"
+    ],
+    "path2": [
+      "in[2]",
+      "n_3"
+    ]
+  }
+]
