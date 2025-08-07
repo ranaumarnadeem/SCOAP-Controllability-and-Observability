@@ -1,4 +1,12 @@
 {
+    "primary_inputs": [
+        "in[7:0]",
+        "en"
+    ],
+    "primary_outputs": [
+        "out[2:0]",
+        "valid"
+    ],
     "gates": [
         {
             "type": "CLKINVX1",

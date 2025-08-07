@@ -1,109 +1,153 @@
 #!/usr/bin/env python3
+"""
+OpenTestability CLI - Main command-line interface.
+
+A comprehensive framework for gate-level testability analysis including
+SCOAP metrics, reconvergent fanout detection, and visualization.
+"""
+
 import argparse
 import sys
-import subprocess
 import os
+from pathlib import Path
 
+# Add src directory to Python path for imports
+SCRIPT_DIR = Path(__file__).parent
+SRC_DIR = SCRIPT_DIR / 'src'
+sys.path.insert(0, str(SRC_DIR))
 
-SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-CODES_DIR  = os.path.join(SCRIPT_DIR, 'codes')
-
-from codes.parser import parse as run_parse
-from codes.scoap import run as run_scoap
+from opentestability.parsers.verilog_parser import parse as run_parse
+from opentestability.parsers.json_converter import convert_txt_to_json
+from opentestability.core.scoap import run as run_scoap
+from opentestability.core.dag_builder import create_dag_from_netlist
+from opentestability.core.reconvergence import analyze_reconvergence
+from opentestability.visualization.graph_renderer import visualize_gate_graph
+from opentestability.utils.file_utils import get_project_paths
 
 
 def check_file(path):
-    if not os.path.exists(path):
+    """Check if a file exists and report status."""
+    if not Path(path).exists():
         print(f"[✗] Input file not found: {path}")
         sys.exit(1)
-    print(f"[1] Found input file at: {path}")
+    print(f"[✓] Found input file: {path}")
 
 
 def main():
-    p = argparse.ArgumentParser(description="OpenTestability CLI")
-    mode = p.add_mutually_exclusive_group(required=True)
-    mode.add_argument('--parse', action='store_true', help="Parse netlist to text")
-    mode.add_argument('--scoap', action='store_true', help="Compute SCOAP metrics")
-    mode.add_argument('--dag', action='store_true', help="Build DAG JSON from parsed netlist")
-    mode.add_argument('--graph', action='store_true', help="Render graph PNG from DAG JSON")
-    mode.add_argument('--reconverge', action='store_true', help="Detect reconvergence")
+    """Main CLI entry point."""
+    parser = argparse.ArgumentParser(
+        description="OpenTestability - Gate-Level Testability Analysis Framework",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  %(prog)s --parse -i design.v -o parsed_design.txt
+  %(prog)s --scoap -i parsed_design.txt -o scoap_results.txt --json
+  %(prog)s --dag -i parsed_design.json
+  %(prog)s --graph -i design_dag.json
+  %(prog)s --reconverge -i design_dag.json
+        """
+    )
+    
+    # Mode selection (mutually exclusive)
+    mode = parser.add_mutually_exclusive_group(required=True)
+    mode.add_argument('--parse', action='store_true', 
+                     help="Parse Verilog netlist to internal format")
+    mode.add_argument('--scoap', action='store_true', 
+                     help="Compute SCOAP testability metrics")
+    mode.add_argument('--dag', action='store_true', 
+                     help="Build DAG representation from parsed netlist")
+    mode.add_argument('--graph', action='store_true', 
+                     help="Generate graph visualization from DAG")
+    mode.add_argument('--reconverge', action='store_true', 
+                     help="Detect reconvergent fanout structures")
 
-    p.add_argument('-i', '--input', required=True, help="Input filename (no path)")
-    p.add_argument('-o', '--output', help="Output filename (required for parse/scoap)")
-    p.add_argument('--json', action='store_true', help="(parse/scoap) also emit JSON output")
-    args = p.parse_args()
+    # Common arguments
+    parser.add_argument('-i', '--input', required=True, 
+                       help="Input filename (relative to appropriate data subdirectory)")
+    parser.add_argument('-o', '--output', 
+                       help="Output filename (required for parse/scoap modes)")
+    parser.add_argument('--json', action='store_true', 
+                       help="Also generate JSON output (for parse/scoap modes)")
+    parser.add_argument('--verbose', action='store_true', 
+                       help="Enable verbose output")
+    
+    args = parser.parse_args()
 
-    # parse/scoap require -o
+    # Validate required arguments
     if (args.parse or args.scoap) and not args.output:
         print("[✗] -o/--output is required for parse and scoap modes")
         sys.exit(1)
 
+    paths = get_project_paths()
+
     try:
         if args.parse:
-            netlist_dir = os.path.join(CODES_DIR, 'netlist')
-            in_path = os.path.join(netlist_dir, args.input)
-            check_file(in_path)
-            print("[2] Running parser...")
-            out_path = run_parse(args.input, args.output)
-            print(f"[3] Parsed TXT output at: {out_path}")
+            # Parse Verilog netlist: data/input/ -> data/parsed/
+            input_path = paths['input'] / args.input
+            check_file(input_path)
+            
+            print("[2] Running Verilog parser...")
+            output_path = run_parse(args.input, args.output)
+            print(f"[3] Parsed netlist saved to: {output_path}")
+            
             if args.json:
-                json_conv = os.path.join(CODES_DIR, 'json_conv.py')
-                print("[2] Converting TXT to JSON...")
-                subprocess.run(['python3', json_conv, out_path], check=True)
-                base, _ = os.path.splitext(out_path)
-                print(f"[3] JSON output at: {base}.json")
+                print("[2] Converting to JSON format...")
+                json_path = convert_txt_to_json(args.output)
+                print(f"[3] JSON format saved to: {json_path}")
 
         elif args.scoap:
-            parsed_dir = os.path.join(CODES_DIR, 'parsednetlist')
-            in_path = os.path.join(parsed_dir, args.input)
-            check_file(in_path)
-            print("[2] Running SCOAP...")
-            out_path = run_scoap(args.input, args.output, json_flag=args.json)
-            print(f"[3] SCOAP TXT at: {out_path}")
+            # SCOAP analysis: data/parsed/ -> data/results/
+            input_path = paths['parsed'] / args.input
+            check_file(input_path)
+            
+            print("[2] Running SCOAP analysis...")
+            output_path = run_scoap(args.input, args.output, json_flag=args.json)
+            print(f"[3] SCOAP results saved to: {output_path}")
+            
             if args.json:
-                base, _ = os.path.splitext(out_path)
-                print(f"[3] SCOAP JSON at: {base}.json")
+                json_name = Path(args.output).stem + ".json"
+                json_path = paths['results'] / json_name
+                print(f"[3] SCOAP JSON saved to: {json_path}")
 
         elif args.dag:
-            # input from codes/parsednetlist, output to codes/dagoutput
-            parsed_dir = os.path.join(CODES_DIR, 'parsednetlist')
-            in_path = os.path.join(parsed_dir, args.input)
-            check_file(in_path)
-            print(f"[2] Building DAG JSON from: {in_path}...")
-            dag_py = os.path.join(CODES_DIR, 'dag.py')
-            subprocess.run(['python3', dag_py, args.input], check=True)
-            output_path = os.path.join(CODES_DIR, 'dagoutput', f"{os.path.splitext(args.input)[0]}_dag.json")
-            print(f"[3] DAG JSON written to: {output_path}")
+            # DAG generation: data/parsed/ -> data/dag_output/
+            input_path = paths['parsed'] / args.input
+            check_file(input_path)
+            
+            print(f"[2] Building DAG from: {input_path}")
+            output_path = create_dag_from_netlist(args.input)
+            print(f"[3] DAG JSON saved to: {output_path}")
 
         elif args.graph:
-            # input from codes/dagoutput, output to codes/graph
-            dag_dir = os.path.join(CODES_DIR, 'dagoutput')
-            in_path = os.path.join(dag_dir, args.input)
-            check_file(in_path)
-            print(f"[2] Rendering graph PNG from: {in_path}...")
-            graph_py = os.path.join(CODES_DIR, 'graph.py')
-            subprocess.run(['python3', graph_py, args.input], check=True)
-            output_png = os.path.join(CODES_DIR, 'graph', f"{os.path.splitext(args.input)[0]}_graph.png")
-            print(f"[3] Graph PNG at: {output_png}")
+            # Graph visualization: data/dag_output/ -> data/graphs/
+            input_path = paths['dag_output'] / args.input
+            check_file(input_path)
+            
+            print(f"[2] Rendering graph visualization from: {input_path}")
+            output_path = visualize_gate_graph(args.input)
+            print(f"[3] Graph visualization saved to: {output_path}")
 
         elif args.reconverge:
-            # input from codes/dagoutput, output to codes/reconvergence
-            dag_dir = os.path.join(CODES_DIR, 'dagoutput')
-            in_path = os.path.join(dag_dir, args.input)
-            check_file(in_path)
-            print(f"[2] Detecting reconvergence from: {in_path}...")
-            reconv_py = os.path.join(CODES_DIR, 'reconverge.py')
-            subprocess.run(['python3', reconv_py, args.input], check=True)
-            output_json = os.path.join(CODES_DIR, 'reconvergence', f"{os.path.splitext(args.input)[0]}_reconv.json")
-            print(f"[3] Reconvergence JSON at: {output_json}")
+            # Reconvergence analysis: data/dag_output/ -> data/reconvergence_output/
+            input_path = paths['dag_output'] / args.input
+            check_file(input_path)
+            
+            print(f"[2] Analyzing reconvergent fanout from: {input_path}")
+            output_path = analyze_reconvergence(args.input)
+            print(f"[3] Reconvergence analysis saved to: {output_path}")
 
-    except subprocess.CalledProcessError as e:
-        print(f"[✗] Subprocess failed: {e}")
+        print("[✓] Operation completed successfully!")
+
+    except FileNotFoundError as e:
+        print(f"[✗] File not found: {e}")
         sys.exit(1)
     except Exception as e:
         print(f"[✗] Error: {e}")
+        if args.verbose:
+            import traceback
+            traceback.print_exc()
         sys.exit(1)
+
 
 if __name__ == "__main__":
     main()
-

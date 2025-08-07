@@ -1,0 +1,208 @@
+{
+    "primary_inputs": [
+        "in[7]",
+        "in[6]",
+        "in[5]",
+        "in[4]",
+        "in[3]",
+        "in[2]",
+        "en"
+    ],
+    "primary_outputs": [
+        "out[2]",
+        "valid"
+    ],
+    "metrics": [
+        {
+            "gate": "CLKINVX1_0",
+            "output": "out[0]",
+            "inputs": [
+                "n_15"
+            ],
+            "cc0": 3,
+            "cc1": 3,
+            "co": "Infinity"
+        },
+        {
+            "gate": "OAI21X1_1",
+            "output": "n_15",
+            "inputs": [
+                "in[7]",
+                "n_14",
+                "en"
+            ],
+            "cc0": 2,
+            "cc1": 2,
+            "co": "Infinity"
+        },
+        {
+            "gate": "NOR2X1_2",
+            "output": "n_14",
+            "inputs": [
+                "in[6]",
+                "n_11"
+            ],
+            "cc0": 4,
+            "cc1": 2,
+            "co": "Infinity"
+        },
+        {
+            "gate": "AOI21X1_3",
+            "output": "out[1]",
+            "inputs": [
+                "n_2",
+                "n_6",
+                "n_0"
+            ],
+            "cc0": 3,
+            "cc1": 4,
+            "co": "Infinity"
+        },
+        {
+            "gate": "AND2X2_4",
+            "output": "valid",
+            "inputs": [
+                "en",
+                "n_10"
+            ],
+            "cc0": 5,
+            "cc1": 2,
+            "co": 1
+        },
+        {
+            "gate": "NOR2X1_5",
+            "output": "n_11",
+            "inputs": [
+                "in[5]",
+                "n_9"
+            ],
+            "cc0": 4,
+            "cc1": 2,
+            "co": "Infinity"
+        },
+        {
+            "gate": "OR4X2_6",
+            "output": "n_10",
+            "inputs": [
+                "in[0]",
+                "in[1]",
+                "n_4",
+                "n_7"
+            ],
+            "cc0": 3,
+            "cc1": "Infinity",
+            "co": 3
+        },
+        {
+            "gate": "NOR2X1_7",
+            "output": "n_9",
+            "inputs": [
+                "in[4]",
+                "n_5"
+            ],
+            "cc0": "Infinity",
+            "cc1": 2,
+            "co": "Infinity"
+        },
+        {
+            "gate": "AND2X2_8",
+            "output": "out[2]",
+            "inputs": [
+                "en",
+                "n_7"
+            ],
+            "cc0": 4,
+            "cc1": 2,
+            "co": 1
+        },
+        {
+            "gate": "OR3X1_9",
+            "output": "n_6",
+            "inputs": [
+                "in[5]",
+                "in[4]",
+                "n_3"
+            ],
+            "cc0": 2,
+            "cc1": 5,
+            "co": "Infinity"
+        },
+        {
+            "gate": "AOI21X1_10",
+            "output": "n_5",
+            "inputs": [
+                "in[1]",
+                "n_1",
+                "in[3]"
+            ],
+            "cc0": "Infinity",
+            "cc1": "Infinity",
+            "co": "Infinity"
+        },
+        {
+            "gate": "INVX1_11",
+            "output": "n_4",
+            "inputs": [
+                "n_3"
+            ],
+            "cc0": 3,
+            "cc1": 4,
+            "co": "Infinity"
+        },
+        {
+            "gate": "OR4X2_12",
+            "output": "n_7",
+            "inputs": [
+                "in[6]",
+                "in[7]",
+                "in[4]",
+                "in[5]"
+            ],
+            "cc0": 2,
+            "cc1": 5,
+            "co": 3
+        },
+        {
+            "gate": "NOR2X1_13",
+            "output": "n_3",
+            "inputs": [
+                "in[2]",
+                "in[3]"
+            ],
+            "cc0": 3,
+            "cc1": 2,
+            "co": "Infinity"
+        },
+        {
+            "gate": "NOR2X1_14",
+            "output": "n_2",
+            "inputs": [
+                "in[6]",
+                "in[7]"
+            ],
+            "cc0": 3,
+            "cc1": 2,
+            "co": "Infinity"
+        },
+        {
+            "gate": "CLKINVX1_15",
+            "output": "n_1",
+            "inputs": [
+                "in[2]"
+            ],
+            "cc0": 2,
+            "cc1": 2,
+            "co": "Infinity"
+        },
+        {
+            "gate": "CLKINVX1_16",
+            "output": "n_0",
+            "inputs": [
+                "en"
+            ],
+            "cc0": 2,
+            "cc1": 2,
+            "co": "Infinity"
+        }
+    ]
+}

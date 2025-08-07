@@ -86,66 +86,140 @@ Download from https://graphviz.org/download/
 
 ## 🚀 Quick Start
 
-### 1. Prepare Your Netlist
+### 1. Usage
 
-Ensure your gate-level netlist is exported from tools like Genus or Synopsys DC. You may need to run the parser to convert it into the accepted format. Some samples are already available in the `data/` directory.
 
-### 2. Run SCOAP Metric Generator
 
 ```bash
-python3 main.py --scoap parsednetlist/my_parsed.txt -o scoap_result.json
+# Get help and see all commands
+./opentestability help
+
+# Show complete workflow  
+./opentestability workflow
+
+# Check your project status
+./opentestability status
 ```
 
-This saves results in `scoapout/`.
-
-### 3. Run Netlist Parser
+### 2. Run Complete Analysis 
 
 ```bash
-python3 main.py --parse raw_netlist.txt outputfilename.v
+# 1. Parse a Verilog netlist  
+./opentestability parse priority_encoder.v priority_enc.txt --json
+
+# 2. Compute SCOAP metrics
+./opentestability scoap priority_enc.txt scoap_results.txt --json
+
+# 3. Build DAG representation
+./opentestability dag priority_enc.json
+
+# 4. Generate visualization  
+./opentestability graph priority_enc_dag.json
+
+# 5. Detect reconvergent fanout
+./opentestability reconverge priority_enc_dag.json
 ```
 
-This saves the parsed netlist in `parsednetlist/`.
+**📖 See [QUICKSTART.md](QUICKSTART.md) for the 5-minute tutorial!**
+
+Results are automatically organized in the `data/` directory structure.
 
 ## 📁 Project Structure
 
 ```
 OpenTestability/
-├── code/
-│   ├── __init__.py
-│   ├── parser.py           # Parses raw gate-level netlists
-│   ├── scoap.py            # Computes combinational SCOAP metrics
-│   ├── DAG.py              # Reconvergent fanout detection logic
-│   ├── parsednetlist/      # Output directory for parsed netlists
-│   ├── scoapout/           # Output directory for SCOAP metric results
-│   └── netlist/
-│       └── priority_encoder.v  # Example input gate-level netlist
-├── EXTRAS/                 # Contains design files and genus script
-├── main.py                 # Main CLI entry point
-├── requirements.txt        # Python dependencies
-├── README.md               # Project overview and usage guide
-├── CONTRIBUTING.md         # Contribution guidelines
-└── LICENSE                 # Open-source license
+├── src/                           # Source code
+│   └── opentestability/          # Main package
+│       ├── __init__.py
+│       ├── core/                 # Core algorithms
+│       │   ├── __init__.py
+│       │   ├── scoap.py         # SCOAP testability metrics
+│       │   ├── dag_builder.py   # DAG construction
+│       │   └── reconvergence.py # Reconvergent fanout detection
+│       ├── parsers/             # Input/output parsers
+│       │   ├── __init__.py
+│       │   ├── verilog_parser.py # Verilog netlist parser
+│       │   └── json_converter.py # JSON format converter
+│       ├── visualization/       # Graph visualization
+│       │   ├── __init__.py
+│       │   └── graph_renderer.py # Graphviz-based rendering
+│       └── utils/               # Utilities
+│           ├── __init__.py
+│           └── file_utils.py    # File and path management
+├── data/                        # Input/output data
+│   ├── input/                   # Input netlists
+│   ├── parsed/                  # Parsed netlists
+│   ├── results/                 # Analysis results
+│   ├── graphs/                  # Generated visualizations
+│   ├── dag_output/              # DAG JSON files
+│   └── reconvergence_output/    # Reconvergence analysis
+├── examples/                    # Example designs and scripts
+│   ├── designs/                 # Sample netlists
+│   └── scripts/                 # Synthesis scripts
+├── tests/                       # Test suite
+├── main.py                      # CLI entry point
+├── setup.py                     # Package installation
+├── requirements.txt             # Python dependencies
+├── README.md                    # Project documentation
+├── CONTRIBUTING.md              # Contribution guidelines
+└── LICENSE                      # Open-source license
 ```
 
 ## 🚀 Usage
 
-The main entry point is `main.py`.
+
+### Get Help Anytime
+
+```bash
+./opentestability help              # Show all commands
+./opentestability help <command>    # Detailed help for specific command  
+./opentestability workflow          # Show complete workflow
+./opentestability status            # Check project status
+```
 
 ### Parse a Netlist
 
 ```bash
-python3 main.py --parse -i raw_netlist.v -o out.txt
+./opentestability parse raw_netlist.v parsed_design.txt --json
 ```
 
-Parsed file will be saved to `parsednetlist/`.
+Parsed files saved to `data/parsed/`.
 
 ### Run SCOAP Analysis
 
 ```bash
-python3 main.py --scoap -i <input.v > -o scoap_result.json|txt
+./opentestability scoap parsed_design.txt scoap_results.txt --json
 ```
 
-JSON results are saved to `scoapout/`.
+Results saved to `data/results/`.
+
+### Build DAG Representation
+
+```bash
+./opentestability dag parsed_design.json
+```
+
+DAG files saved to `data/dag_output/`.
+
+### Generate Visualization
+
+```bash
+./opentestability graph design_dag.json
+```
+
+Graphs saved to `data/graphs/`.
+
+### Detect Reconvergent Fanout
+
+```bash
+./opentestability reconverge design_dag.json
+```
+
+Analysis results saved to `data/reconvergence_output/`.
+
+### WSL Users (Virtual Environment)
+
+The CLI automatically works with your WSL virtual environment - just run the commands directly!
 
 ### Argument Summary
 ### Argument Summary

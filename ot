@@ -1,0 +1,23 @@
+#!/bin/bash
+#
+# OpenTestability WSL Wrapper Script
+# 
+# This script automatically activates your WSL virtual environment
+# and runs the OpenTestability CLI with the provided arguments.
+#
+# Usage: ./ot <command> [arguments]
+# Examples:
+#   ./ot help
+#   ./ot parse design.v output.txt
+#   ./ot workflow
+#
+
+# Check if virtual environment exists
+if [ ! -d "venv" ]; then
+    echo "❌ Virtual environment 'venv' not found!"
+    echo "Please ensure you have a virtual environment set up in the project directory."
+    exit 1
+fi
+
+# Activate virtual environment and run opentestability
+source venv/bin/activate && ./opentestability "$@"
