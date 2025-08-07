@@ -1,0 +1,967 @@
+{
+    "primary_inputs": [
+        "clk",
+        "A[3:0]",
+        "B[3:0]"
+    ],
+    "primary_outputs": [
+        "result[7:0]"
+    ],
+    "gates": [
+        {
+            "type": "DFFX1",
+            "output": "result[6]",
+            "inputs": [
+                "clk",
+                "mult_stage2[6]"
+            ]
+        },
+        {
+            "type": "DFFX1",
+            "output": "UNCONNECTED",
+            "inputs": [
+                "clk",
+                "mult_stage2[6]"
+            ]
+        },
+        {
+            "type": "DFFX1",
+            "output": "result[5]",
+            "inputs": [
+                "clk",
+                "mult_stage2[5]"
+            ]
+        },
+        {
+            "type": "DFFX1",
+            "output": "UNCONNECTED0",
+            "inputs": [
+                "clk",
+                "mult_stage2[5]"
+            ]
+        },
+        {
+            "type": "DFFX1",
+            "output": "mult_stage2[5]",
+            "inputs": [
+                "clk",
+                "mult_stage1[5]"
+            ]
+        },
+        {
+            "type": "DFFX1",
+            "output": "UNCONNECTED1",
+            "inputs": [
+                "clk",
+                "mult_stage1[5]"
+            ]
+        },
+        {
+            "type": "DFFX1",
+            "output": "mult_stage2[6]",
+            "inputs": [
+                "clk",
+                "mult_stage1[6]"
+            ]
+        },
+        {
+            "type": "DFFX1",
+            "output": "UNCONNECTED2",
+            "inputs": [
+                "clk",
+                "mult_stage1[6]"
+            ]
+        },
+        {
+            "type": "DFFX1",
+            "output": "result[7]",
+            "inputs": [
+                "clk",
+                "mult_stage2[7]"
+            ]
+        },
+        {
+            "type": "DFFX1",
+            "output": "UNCONNECTED3",
+            "inputs": [
+                "clk",
+                "mult_stage2[7]"
+            ]
+        },
+        {
+            "type": "DFFX1",
+            "output": "result[4]",
+            "inputs": [
+                "clk",
+                "mult_stage2[4]"
+            ]
+        },
+        {
+            "type": "DFFX1",
+            "output": "UNCONNECTED4",
+            "inputs": [
+                "clk",
+                "mult_stage2[4]"
+            ]
+        },
+        {
+            "type": "DFFX1",
+            "output": "mult_stage1[6]",
+            "inputs": [
+                "clk",
+                "n_52"
+            ]
+        },
+        {
+            "type": "DFFX1",
+            "output": "UNCONNECTED5",
+            "inputs": [
+                "clk",
+                "n_52"
+            ]
+        },
+        {
+            "type": "DFFX1",
+            "output": "mult_stage1[5]",
+            "inputs": [
+                "clk",
+                "n_53"
+            ]
+        },
+        {
+            "type": "DFFX1",
+            "output": "UNCONNECTED6",
+            "inputs": [
+                "clk",
+                "n_53"
+            ]
+        },
+        {
+            "type": "DFFX1",
+            "output": "mult_stage2[4]",
+            "inputs": [
+                "clk",
+                "mult_stage1[4]"
+            ]
+        },
+        {
+            "type": "DFFX1",
+            "output": "UNCONNECTED7",
+            "inputs": [
+                "clk",
+                "mult_stage1[4]"
+            ]
+        },
+        {
+            "type": "DFFX1",
+            "output": "mult_stage2[7]",
+            "inputs": [
+                "clk",
+                "mult_stage1[7]"
+            ]
+        },
+        {
+            "type": "DFFX1",
+            "output": "UNCONNECTED8",
+            "inputs": [
+                "clk",
+                "mult_stage1[7]"
+            ]
+        },
+        {
+            "type": "CLKXOR2X1",
+            "output": "n_53",
+            "inputs": [
+                "n_40",
+                "n_49"
+            ]
+        },
+        {
+            "type": "DFFX1",
+            "output": "result[3]",
+            "inputs": [
+                "clk",
+                "mult_stage2[3]"
+            ]
+        },
+        {
+            "type": "DFFX1",
+            "output": "UNCONNECTED9",
+            "inputs": [
+                "clk",
+                "mult_stage2[3]"
+            ]
+        },
+        {
+            "type": "CLKXOR2X1",
+            "output": "n_52",
+            "inputs": [
+                "n_25",
+                "n_47"
+            ]
+        },
+        {
+            "type": "DFFX1",
+            "output": "mult_stage1[7]",
+            "inputs": [
+                "clk",
+                "n_51"
+            ]
+        },
+        {
+            "type": "DFFX1",
+            "output": "UNCONNECTED10",
+            "inputs": [
+                "clk",
+                "n_51"
+            ]
+        },
+        {
+            "type": "DFFX1",
+            "output": "mult_stage1[4]",
+            "inputs": [
+                "clk",
+                "n_50"
+            ]
+        },
+        {
+            "type": "DFFX1",
+            "output": "UNCONNECTED11",
+            "inputs": [
+                "clk",
+                "n_50"
+            ]
+        },
+        {
+            "type": "DFFX1",
+            "output": "mult_stage2[3]",
+            "inputs": [
+                "clk",
+                "mult_stage1[3]"
+            ]
+        },
+        {
+            "type": "DFFX1",
+            "output": "UNCONNECTED12",
+            "inputs": [
+                "clk",
+                "mult_stage1[3]"
+            ]
+        },
+        {
+            "type": "OAI21X1",
+            "output": "n_51",
+            "inputs": [
+                "n_22",
+                "n_45",
+                "n_24"
+            ]
+        },
+        {
+            "type": "CLKXOR2X1",
+            "output": "n_50",
+            "inputs": [
+                "n_48",
+                "n_41"
+            ]
+        },
+        {
+            "type": "AOI21X1",
+            "output": "n_49",
+            "inputs": [
+                "n_39",
+                "n_48",
+                "n_43"
+            ]
+        },
+        {
+            "type": "AOI21X1",
+            "output": "n_47",
+            "inputs": [
+                "n_42",
+                "n_48",
+                "n_46"
+            ]
+        },
+        {
+            "type": "DFFX1",
+            "output": "mult_stage1[3]",
+            "inputs": [
+                "clk",
+                "n_44"
+            ]
+        },
+        {
+            "type": "DFFX1",
+            "output": "UNCONNECTED13",
+            "inputs": [
+                "clk",
+                "n_44"
+            ]
+        },
+        {
+            "type": "INVX1",
+            "output": "n_46",
+            "inputs": [
+                "n_45"
+            ]
+        },
+        {
+            "type": "DFFX1",
+            "output": "result[2]",
+            "inputs": [
+                "clk",
+                "mult_stage2[2]"
+            ]
+        },
+        {
+            "type": "DFFX1",
+            "output": "UNCONNECTED14",
+            "inputs": [
+                "clk",
+                "mult_stage2[2]"
+            ]
+        },
+        {
+            "type": "ADDFX1",
+            "output": "n_48",
+            "inputs": [
+                "n_15",
+                "n_28",
+                "n_30"
+            ]
+        },
+        {
+            "type": "ADDFX1",
+            "output": "n_44",
+            "inputs": [
+                "n_15",
+                "n_28",
+                "n_30"
+            ]
+        },
+        {
+            "type": "OAI21X1",
+            "output": "n_45",
+            "inputs": [
+                "n_37",
+                "n_43",
+                "n_42"
+            ]
+        },
+        {
+            "type": "DFFX1",
+            "output": "mult_stage2[2]",
+            "inputs": [
+                "clk",
+                "mult_stage1[2]"
+            ]
+        },
+        {
+            "type": "DFFX1",
+            "output": "UNCONNECTED15",
+            "inputs": [
+                "clk",
+                "mult_stage1[2]"
+            ]
+        },
+        {
+            "type": "NOR2X1",
+            "output": "n_41",
+            "inputs": [
+                "n_38",
+                "n_43"
+            ]
+        },
+        {
+            "type": "NAND2X1",
+            "output": "n_40",
+            "inputs": [
+                "n_36",
+                "n_42"
+            ]
+        },
+        {
+            "type": "DFFX1",
+            "output": "mult_stage1[2]",
+            "inputs": [
+                "clk",
+                "n_31"
+            ]
+        },
+        {
+            "type": "DFFX1",
+            "output": "UNCONNECTED16",
+            "inputs": [
+                "clk",
+                "n_31"
+            ]
+        },
+        {
+            "type": "INVX1",
+            "output": "n_39",
+            "inputs": [
+                "n_38"
+            ]
+        },
+        {
+            "type": "INVX1",
+            "output": "n_37",
+            "inputs": [
+                "n_36"
+            ]
+        },
+        {
+            "type": "NOR2X1",
+            "output": "n_38",
+            "inputs": [
+                "n_34",
+                "n_35"
+            ]
+        },
+        {
+            "type": "AND2X1",
+            "output": "n_43",
+            "inputs": [
+                "n_35",
+                "n_34"
+            ]
+        },
+        {
+            "type": "NAND2X1",
+            "output": "n_36",
+            "inputs": [
+                "n_33",
+                "n_32"
+            ]
+        },
+        {
+            "type": "OR2X1",
+            "output": "n_42",
+            "inputs": [
+                "n_33",
+                "n_32"
+            ]
+        },
+        {
+            "type": "CLKXOR2X1",
+            "output": "n_31",
+            "inputs": [
+                "n_27",
+                "n_29"
+            ]
+        },
+        {
+            "type": "ADDFX1",
+            "output": "n_32",
+            "inputs": [
+                "n_4",
+                "n_17",
+                "n_16"
+            ]
+        },
+        {
+            "type": "ADDFX1",
+            "output": "n_35",
+            "inputs": [
+                "n_4",
+                "n_17",
+                "n_16"
+            ]
+        },
+        {
+            "type": "ADDFX1",
+            "output": "n_34",
+            "inputs": [
+                "n_2",
+                "n_5",
+                "n_18"
+            ]
+        },
+        {
+            "type": "ADDFX1",
+            "output": "n_30",
+            "inputs": [
+                "n_2",
+                "n_5",
+                "n_18"
+            ]
+        },
+        {
+            "type": "DFFX1",
+            "output": "result[1]",
+            "inputs": [
+                "clk",
+                "mult_stage2[1]"
+            ]
+        },
+        {
+            "type": "DFFX1",
+            "output": "UNCONNECTED17",
+            "inputs": [
+                "clk",
+                "mult_stage2[1]"
+            ]
+        },
+        {
+            "type": "OAI21X1",
+            "output": "n_29",
+            "inputs": [
+                "n_20",
+                "n_19",
+                "n_26"
+            ]
+        },
+        {
+            "type": "DFFX1",
+            "output": "mult_stage2[1]",
+            "inputs": [
+                "clk",
+                "mult_stage1[1]"
+            ]
+        },
+        {
+            "type": "DFFX1",
+            "output": "UNCONNECTED18",
+            "inputs": [
+                "clk",
+                "mult_stage1[1]"
+            ]
+        },
+        {
+            "type": "NAND2X1",
+            "output": "n_28",
+            "inputs": [
+                "n_27",
+                "n_26"
+            ]
+        },
+        {
+            "type": "OAI21X1",
+            "output": "n_25",
+            "inputs": [
+                "n_21",
+                "n_23",
+                "n_24"
+            ]
+        },
+        {
+            "type": "CLKXOR2X1",
+            "output": "n_33",
+            "inputs": [
+                "n_23",
+                "n_13"
+            ]
+        },
+        {
+            "type": "NOR2X1",
+            "output": "n_22",
+            "inputs": [
+                "n_21",
+                "n_23"
+            ]
+        },
+        {
+            "type": "NAND2X1",
+            "output": "n_26",
+            "inputs": [
+                "n_20",
+                "n_19"
+            ]
+        },
+        {
+            "type": "DFFX1",
+            "output": "result[0]",
+            "inputs": [
+                "clk",
+                "mult_stage2[0]"
+            ]
+        },
+        {
+            "type": "DFFX1",
+            "output": "UNCONNECTED19",
+            "inputs": [
+                "clk",
+                "mult_stage2[0]"
+            ]
+        },
+        {
+            "type": "DFFX1",
+            "output": "mult_stage1[1]",
+            "inputs": [
+                "clk",
+                "n_14"
+            ]
+        },
+        {
+            "type": "DFFX1",
+            "output": "UNCONNECTED20",
+            "inputs": [
+                "clk",
+                "n_14"
+            ]
+        },
+        {
+            "type": "ADDHX1",
+            "output": "n_17",
+            "inputs": [
+                "n_6",
+                "n_1"
+            ]
+        },
+        {
+            "type": "ADDHX1",
+            "output": "n_18",
+            "inputs": [
+                "n_6",
+                "n_1"
+            ]
+        },
+        {
+            "type": "ADDHX1",
+            "output": "n_23",
+            "inputs": [
+                "n_0",
+                "n_7"
+            ]
+        },
+        {
+            "type": "ADDHX1",
+            "output": "n_16",
+            "inputs": [
+                "n_0",
+                "n_7"
+            ]
+        },
+        {
+            "type": "ADDHX1",
+            "output": "n_15",
+            "inputs": [
+                "n_8",
+                "n_3"
+            ]
+        },
+        {
+            "type": "ADDHX1",
+            "output": "n_19",
+            "inputs": [
+                "n_8",
+                "n_3"
+            ]
+        },
+        {
+            "type": "DFFX1",
+            "output": "mult_stage2[0]",
+            "inputs": [
+                "clk",
+                "mult_stage1[0]"
+            ]
+        },
+        {
+            "type": "DFFX1",
+            "output": "UNCONNECTED21",
+            "inputs": [
+                "clk",
+                "mult_stage1[0]"
+            ]
+        },
+        {
+            "type": "AND2X1",
+            "output": "n_14",
+            "inputs": [
+                "n_27",
+                "n_9"
+            ]
+        },
+        {
+            "type": "CLKXOR2X1",
+            "output": "n_13",
+            "inputs": [
+                "n_11",
+                "n_12"
+            ]
+        },
+        {
+            "type": "DFFX1",
+            "output": "mult_stage1[0]",
+            "inputs": [
+                "clk",
+                "n_10"
+            ]
+        },
+        {
+            "type": "DFFX1",
+            "output": "UNCONNECTED22",
+            "inputs": [
+                "clk",
+                "n_10"
+            ]
+        },
+        {
+            "type": "OR2X1",
+            "output": "n_24",
+            "inputs": [
+                "n_12",
+                "n_11"
+            ]
+        },
+        {
+            "type": "NAND2X1",
+            "output": "n_27",
+            "inputs": [
+                "n_10",
+                "n_20"
+            ]
+        },
+        {
+            "type": "OAI22X1",
+            "output": "n_9",
+            "inputs": [
+                "A_reg[1]",
+                "B_reg[0]",
+                "B_reg[1]",
+                "A_reg[0]"
+            ]
+        },
+        {
+            "type": "NOR2X1",
+            "output": "n_8",
+            "inputs": [
+                "A_reg[0]",
+                "B_reg[2]"
+            ]
+        },
+        {
+            "type": "NOR2X1",
+            "output": "n_7",
+            "inputs": [
+                "A_reg[3]",
+                "B_reg[1]"
+            ]
+        },
+        {
+            "type": "NOR2X1",
+            "output": "n_6",
+            "inputs": [
+                "A_reg[2]",
+                "B_reg[1]"
+            ]
+        },
+        {
+            "type": "NOR2X1",
+            "output": "n_5",
+            "inputs": [
+                "A_reg[1]",
+                "B_reg[2]"
+            ]
+        },
+        {
+            "type": "NOR2X1",
+            "output": "n_10",
+            "inputs": [
+                "A_reg[0]",
+                "B_reg[0]"
+            ]
+        },
+        {
+            "type": "NOR2X1",
+            "output": "n_21",
+            "inputs": [
+                "A_reg[3]",
+                "B_reg[3]"
+            ]
+        },
+        {
+            "type": "OR2X1",
+            "output": "n_12",
+            "inputs": [
+                "B_reg[2]",
+                "A_reg[3]"
+            ]
+        },
+        {
+            "type": "NOR2X1",
+            "output": "n_4",
+            "inputs": [
+                "A_reg[1]",
+                "B_reg[3]"
+            ]
+        },
+        {
+            "type": "NOR2X1",
+            "output": "n_3",
+            "inputs": [
+                "A_reg[2]",
+                "B_reg[0]"
+            ]
+        },
+        {
+            "type": "NOR2X1",
+            "output": "n_2",
+            "inputs": [
+                "A_reg[0]",
+                "B_reg[3]"
+            ]
+        },
+        {
+            "type": "NOR2X1",
+            "output": "n_1",
+            "inputs": [
+                "A_reg[3]",
+                "B_reg[0]"
+            ]
+        },
+        {
+            "type": "NOR2X1",
+            "output": "n_0",
+            "inputs": [
+                "A_reg[2]",
+                "B_reg[2]"
+            ]
+        },
+        {
+            "type": "OR2X1",
+            "output": "n_11",
+            "inputs": [
+                "B_reg[3]",
+                "A_reg[2]"
+            ]
+        },
+        {
+            "type": "NOR2X1",
+            "output": "n_20",
+            "inputs": [
+                "A_reg[1]",
+                "B_reg[1]"
+            ]
+        },
+        {
+            "type": "DFFX1",
+            "output": "UNCONNECTED23",
+            "inputs": [
+                "clk",
+                "B[1]"
+            ]
+        },
+        {
+            "type": "DFFX1",
+            "output": "B_reg[1]",
+            "inputs": [
+                "clk",
+                "B[1]"
+            ]
+        },
+        {
+            "type": "DFFX1",
+            "output": "UNCONNECTED24",
+            "inputs": [
+                "clk",
+                "A[3]"
+            ]
+        },
+        {
+            "type": "DFFX1",
+            "output": "A_reg[3]",
+            "inputs": [
+                "clk",
+                "A[3]"
+            ]
+        },
+        {
+            "type": "DFFX1",
+            "output": "UNCONNECTED25",
+            "inputs": [
+                "clk",
+                "B[0]"
+            ]
+        },
+        {
+            "type": "DFFX1",
+            "output": "B_reg[0]",
+            "inputs": [
+                "clk",
+                "B[0]"
+            ]
+        },
+        {
+            "type": "DFFX1",
+            "output": "UNCONNECTED26",
+            "inputs": [
+                "clk",
+                "B[2]"
+            ]
+        },
+        {
+            "type": "DFFX1",
+            "output": "B_reg[2]",
+            "inputs": [
+                "clk",
+                "B[2]"
+            ]
+        },
+        {
+            "type": "DFFX1",
+            "output": "UNCONNECTED27",
+            "inputs": [
+                "clk",
+                "A[1]"
+            ]
+        },
+        {
+            "type": "DFFX1",
+            "output": "A_reg[1]",
+            "inputs": [
+                "clk",
+                "A[1]"
+            ]
+        },
+        {
+            "type": "DFFX1",
+            "output": "UNCONNECTED28",
+            "inputs": [
+                "clk",
+                "A[2]"
+            ]
+        },
+        {
+            "type": "DFFX1",
+            "output": "A_reg[2]",
+            "inputs": [
+                "clk",
+                "A[2]"
+            ]
+        },
+        {
+            "type": "DFFX1",
+            "output": "UNCONNECTED29",
+            "inputs": [
+                "clk",
+                "B[3]"
+            ]
+        },
+        {
+            "type": "DFFX1",
+            "output": "B_reg[3]",
+            "inputs": [
+                "clk",
+                "B[3]"
+            ]
+        },
+        {
+            "type": "DFFX1",
+            "output": "UNCONNECTED30",
+            "inputs": [
+                "clk",
+                "A[0]"
+            ]
+        },
+        {
+            "type": "DFFX1",
+            "output": "A_reg[0]",
+            "inputs": [
+                "clk",
+                "A[0]"
+            ]
+        }
+    ]
+}
